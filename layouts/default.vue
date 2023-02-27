@@ -1,0 +1,18 @@
+<script setup lang="ts">
+/* Import modules. */
+import moment from 'moment'
+
+const curYear = moment().format('YYYY')
+</script>
+
+<template>
+    <main class="-mt-5 sm:mt-0 flex flex-col w-screen h-screen justify-center items-center bg-gradient-to-r from-purple-300 to-rose-300">
+        <slot />
+
+        <footer class="mt-2">
+            <p class="text-xs sm:text-sm text-rose-700 opacity-50">
+                Copyright {{new Date().getFullYear()}}. Ava's DAO. All rights reserved.
+            </p>
+        </footer>
+    </main>
+</template>

@@ -1,0 +1,1 @@
+export { default } from "file:///Workspace/avasdao/avasdao.org/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"

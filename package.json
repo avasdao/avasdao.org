@@ -1,36 +1,21 @@
 {
   "name": "avasdao.org",
-  "version": "22.6.1",
+  "version": "23.2.27",
   "license": "MIT",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "core-js": "3.6.5",
-    "moment": "2.29.3",
+    "moment": "2.29.4",
     "numeral": "2.0.6",
-    "superagent": "7.1.6",
-    "uuid": "8.3.2",
-    "vue": "3.0.0",
-    "vue-router": "4.0.15",
-    "vuex": "4.0.2"
+    "nuxt": "3.2.2",
+    "uuid": "9.0.0"
   },
   "devDependencies": {
-    "@tailwindcss/aspect-ratio": "0.2.1",
-    "@tailwindcss/forms": "0.3.3",
-    "@tailwindcss/postcss7-compat": "2.2.7",
-    "@tailwindcss/typography": "0.4.1",
-    "@vue/cli-plugin-babel": "4.5.13",
-    "@vue/cli-plugin-eslint": "4.5.13",
-    "@vue/cli-plugin-router": "4.5.13",
-    "@vue/cli-plugin-vuex": "4.5.13",
-    "@vue/cli-service": "4.5.13",
-    "@vue/compiler-sfc": "3.0.0",
-    "babel-eslint": "10.1.0",
-    "eslint": "6.7.2",
-    "eslint-plugin-vue": "7.0.0",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+    "@nuxtjs/tailwindcss": "6.4.1"
   }
 }
