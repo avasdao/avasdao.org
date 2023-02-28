@@ -6,7 +6,7 @@ const curYear = moment().format('YYYY')
 </script>
 
 <template>
-    <main class="-mt-5 sm:mt-0 flex flex-col w-screen h-screen justify-center items-center bg-gradient-to-r from-purple-300 to-rose-300">
+    <main class="-mt-5 sm:mt-0 pb-10 flex flex-col w-screen h-screen justify-center items-center bg-gradient-to-r from-purple-300 to-rose-300">
         <slot />
 
         <footer class="mt-2">
