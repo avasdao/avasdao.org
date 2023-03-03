@@ -3,8 +3,8 @@ version: '3.7'
 services:
   app:
     build: .
-    image: causes-cash
-    container_name: causes-cash
+    image: avasdao
+    container_name: avasdao
     restart: always
     network_mode: 'host'
     # ports:
