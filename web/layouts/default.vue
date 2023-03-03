@@ -11,7 +11,7 @@ const curYear = moment().format('YYYY')
 
         <footer class="mt-2">
             <p class="text-xs sm:text-sm text-rose-700 opacity-50">
-                Copyright {{new Date().getFullYear()}}. Ava's DAO. All rights reserved.
+                Copyright 2022-{{new Date().getFullYear()}}. Ava's DAO. All rights reserved.
             </p>
         </footer>
     </main>
