@@ -65,7 +65,7 @@ milestones.value.push({
     title: `Launch Nexaverse Mainnet`,
     status: 'planning',
     summary: `Avalanche Subnet running an EVM-compatible sidechain with NEX as its native currency.`,
-    period: '1H 2024',
+    period: '1H 2023',
 })
 
 milestones.value.push({
@@ -73,7 +73,7 @@ milestones.value.push({
     title: `Launch Nexa Shell`,
     status: 'pending',
     summary: `An enterprise-class data provider of ALL things Nexa.`,
-    period: '2H 2023',
+    period: '1H 2023',
 })
 
 milestones.value.push({
