@@ -8,7 +8,7 @@ export default defineNuxtConfig({
             meta: [
                 { charset: 'utf-8' },
                 { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-                { hid: 'description', name: 'description', content: `Ava Nakamoto showcases her life's work in a DAO that carries on where here father left off in 2010.` },
+                { hid: 'description', name: 'description', content: `Ava Nakamoto showcases her life's work in a DAO that carries on where her father left off in 2010.` },
                 { name: 'format-detection', content: 'telephone=no' }
             ],
             link: [
