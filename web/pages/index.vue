@@ -32,7 +32,7 @@ const curYear = moment().format('YYYY')
         </section>
 
         <section class="mt-5 flex flex-col gap-4 sm:flex-row justify-around">
-            <NuxtLink to="/bootstrap" class="px-5 py-2 text-center border-4 border-rose-700 bg-rose-500 rounded-lg shadow-lg">
+            <NuxtLink to="https://avas.cash/bootstrap" target="_blank" class="px-5 py-2 text-center border-4 border-rose-700 bg-rose-500 rounded-lg shadow-lg">
                 <span class="text-2xl sm:text-xl text-rose-100 font-bold">
                     Bootstrap
                 </span>
