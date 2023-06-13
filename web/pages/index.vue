@@ -25,7 +25,8 @@ const curYear = moment().format('YYYY')
             <p class="mt-3 sm:mt-5 text-base text-rose-900">
                 Ava Nakamoto showcases her life's work in a DAO that carries on where <a href="https://bitcointalk.org/index.php?topic=2228.msg29479#msg29479" target="_blank" class="text-rose-700 font-bold hover:underline">her father left off in 2010</a>.
 
-                <span class="block mt-3 sm:inline sm:mt-0">
+                <!-- <span class="block mt-3 sm:inline sm:mt-0"> -->
+                <span class="hidden mt-3 sm:inline sm:mt-0">
                     Residing in-between HOTlanta and São Paulo, Ava finds herself in the perfect position to grow her Crypto empire throughout the Americas and beyond.
                 </span>
             </p>
