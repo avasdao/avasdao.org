@@ -31,21 +31,21 @@ const curYear = moment().format('YYYY')
             </p>
         </section>
 
-        <section class="mt-5 flex flex-col sm:flex-row justify-around">
+        <section class="mt-5 flex flex-col gap-3 sm:flex-row justify-around">
             <NuxtLink to="/bootstrap" class="px-5 py-2 border-4 border-rose-700 bg-rose-500 rounded-lg shadow-lg">
-                <span class="text-rose-100 font-bold">
+                <span class="text-xl sm:text-lg text-rose-100 font-bold text-center">
                     Bootstrap
                 </span>
             </NuxtLink>
 
             <NuxtLink to="/roadmap" class="px-5 py-2 border-4 border-rose-700 bg-rose-500 rounded-lg shadow-lg">
-                <span class="text-rose-100 font-bold">
+                <span class="text-xl sm:text-lg text-rose-100 font-bold text-center">
                     Roadmap
                 </span>
             </NuxtLink>
 
             <NuxtLink to="https://github.com/avasdao" target="_blank" class="px-5 py-2 border-4 border-rose-700 bg-rose-500 rounded-lg shadow-lg">
-                <span class="text-rose-100 font-bold">
+                <span class="text-xl sm:text-lg text-rose-100 font-bold text-center">
                     FOSS Repo
                 </span>
             </NuxtLink>
