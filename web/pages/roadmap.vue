@@ -13,7 +13,7 @@ milestones.value.push({
 
 milestones.value.push({
     id: '89de5b8e-f9ad-459d-8fa5-0d3b2366c842',
-    title: `Launch Causes.Cash Platform`,
+    title: `Launch Causes Cash Crowdfunder`,
     status: 'complete',
     summary: `Permissionless, non-custodial crowdfunding for individuals and teams to use for raising project funds.`,
     period: '1H 2023',
@@ -29,7 +29,7 @@ milestones.value.push({
 
 milestones.value.push({
     id: 'cba1438f-627c-4de0-9ea7-944f0e571dc5',
-    title: `Launch Nexaverse Testnet`,
+    title: `Launch Meta (EVM) Testnet`,
     status: 'complete',
     summary: `Avalanche Subnet running an EVM-compatible sidechain with NEXA as its native currency.`,
     period: '1H 2023',
@@ -47,7 +47,7 @@ milestones.value.push({
 
 milestones.value.push({
     id: 'e52d04dc-34ab-4e17-aae4-65f772a5ed4d',
-    title: `Nexa (Instant) Swap`,
+    title: `Re-launch Nexa (Instant) Swap`,
     status: 'pending',
     summary: `A non-custodial asset swapping service to quickly exchange Nexa to other cryptos.`,
     period: '2H 2023',
@@ -63,7 +63,7 @@ milestones.value.push({
 
 milestones.value.push({
     id: '267bccbf-61bf-4bd5-a8a1-9545ff4ee092',
-    title: `Launch Nexaverse Mainnet`,
+    title: `Launch Meta (EVM) Mainnet`,
     status: 'planning',
     summary: `Avalanche Subnet running an EVM-compatible sidechain with NEXA as its native currency.`,
     period: '1H 2023',
