@@ -1,16 +1,6 @@
 <script setup>
 const milestones = ref([])
 
-// 2H 2022
-
-milestones.value.push({
-    id: '89de5b8e-f9ad-459d-8fa5-0d3b2366c842',
-    title: `Launch Causes Cash Crowdfunder`,
-    status: 'complete',
-    summary: `Permissionless, non-custodial crowdfunding for individuals and teams to use for raising project funds.`,
-    period: '2H 2022',
-})
-
 // 1H 2023
 
 milestones.value.push({
@@ -18,6 +8,14 @@ milestones.value.push({
     title: `Launch NexaJS Library + SDK`,
     status: 'complete',
     summary: `A complete suite of modules and tools for Nexa's JavaScript builders.`,
+    period: '1H 2023',
+})
+
+milestones.value.push({
+    id: '89de5b8e-f9ad-459d-8fa5-0d3b2366c842',
+    title: `Launch Causes Cash Crowdfunder`,
+    status: 'complete',
+    summary: `Permissionless, non-custodial crowdfunding for individuals and teams to use for raising project funds.`,
     period: '1H 2023',
 })
 
@@ -183,7 +181,7 @@ milestones.value.push({
             </h1>
 
             <h3 class="text-lg sm:text-2xl">
-                2022 thru 2026
+                2023 thru 2026
             </h3>
         </header>
 
