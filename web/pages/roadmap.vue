@@ -7,7 +7,7 @@ milestones.value.push({
     id: '30e46179-414c-4673-a2f5-860a8161c3a2',
     title: `Launch NexaJS Library + SDK`,
     status: 'complete',
-    summary: `A complete suite of Modules and Tools for Nexa's JavaScript builders.`,
+    summary: `A complete suite of modules and tools for Nexa's JavaScript builders.`,
     period: '1H 2023',
 })
 
@@ -15,7 +15,7 @@ milestones.value.push({
     id: '89de5b8e-f9ad-459d-8fa5-0d3b2366c842',
     title: `Launch Causes.Cash Platform`,
     status: 'complete',
-    summary: `Decentralized, Non-custodial Crowdfunding`,
+    summary: `Permissionless, non-custodial crowdfunding for individuals and teams to use for raising project funds.`,
     period: '1H 2023',
 })
 
@@ -23,7 +23,7 @@ milestones.value.push({
     id: 'e3645851-36b0-41b2-82cf-ddb3be236448',
     title: `Launch Nexa Shell`,
     status: 'complete',
-    summary: `An enterprise-class data provider of ALL things Nexa.`,
+    summary: `An enterprise-class data provider for ALL things Nexa.`,
     period: '1H 2023',
 })
 
@@ -31,7 +31,7 @@ milestones.value.push({
     id: 'cba1438f-627c-4de0-9ea7-944f0e571dc5',
     title: `Launch Nexaverse Testnet`,
     status: 'complete',
-    summary: `Avalanche Subnet running an EVM-compatible sidechain with NEX as its native currency.`,
+    summary: `Avalanche Subnet running an EVM-compatible sidechain with NEXA as its native currency.`,
     period: '1H 2023',
 })
 
@@ -41,7 +41,7 @@ milestones.value.push({
     id: '0ece6cc9-5a3a-4058-83bc-0be2bd778b3d',
     title: `Launch Awesome Nexa List + Web Portal`,
     status: 'pending',
-    summary: `A curated catalog of the BEST of NEXA.`,
+    summary: `A curated catalog of the BEST of Nexa's extensive resources.`,
     period: '2H 2023',
 })
 
@@ -49,7 +49,7 @@ milestones.value.push({
     id: 'e52d04dc-34ab-4e17-aae4-65f772a5ed4d',
     title: `Nexa (Instant) Swap`,
     status: 'pending',
-    summary: `A dedicated Nexa exchange supporting 3rd-party platforms (using API keys), including: MEXC, Txbit and Exbitron.`,
+    summary: `A non-custodial asset swapping service to quickly exchange Nexa to other cryptos.`,
     period: '2H 2023',
 })
 
@@ -57,7 +57,7 @@ milestones.value.push({
     id: 'e52d04dc-34ab-4e17-aae4-65f772a5ed4d',
     title: `Nexa Token Exchange`,
     status: 'pending',
-    summary: `A dedicated Nexa exchange supporting 3rd-party platforms (using API keys), including: MEXC, Txbit and Exbitron.`,
+    summary: `A dedicated Nexa exchange supporting 3rd-party platforms (using API keys), including: CoinEx, MEXC and Txbit.`,
     period: '2H 2023',
 })
 
@@ -65,7 +65,7 @@ milestones.value.push({
     id: '267bccbf-61bf-4bd5-a8a1-9545ff4ee092',
     title: `Launch Nexaverse Mainnet`,
     status: 'planning',
-    summary: `Avalanche Subnet running an EVM-compatible sidechain with NEX as its native currency.`,
+    summary: `Avalanche Subnet running an EVM-compatible sidechain with NEXA as its native currency.`,
     period: '1H 2023',
 })
 
@@ -81,7 +81,7 @@ milestones.value.push({
     id: '0c869a8c-136f-441e-aba5-021d4cb879d0',
     title: `Launch PyNexa Library`,
     status: 'pending',
-    summary: `A complete suite of Modules and Tools for Nexa's Python builders.`,
+    summary: `A complete suite of modules and tools for Nexa's Python builders.`,
     period: '1H 2023',
 })
 
@@ -89,7 +89,7 @@ milestones.value.push({
     id: '2a163a9d-6f67-4785-8bed-03b4407b0788',
     title: `Launch NexaRs Library`,
     status: 'pending',
-    summary: `A complete suite of Modules and Tools for Nexa's Rust builders.`,
+    summary: `A complete suite of modules and tools for Nexa's Rust builders.`,
     period: '1H 2023',
 })
 
@@ -134,7 +134,7 @@ milestones.value.push({
     title: `Launch Ava's #BUIDL (Accelerator)`,
     status: 'planning',
     summary: `Support startups building on Nexa.`,
-    period: '2H 2025',
+    period: '2H 2024',
 })
 
 // 1H 2025
@@ -144,7 +144,7 @@ milestones.value.push({
     title: `Nexaverse Scaling`,
     status: 'planning',
     summary: `Grow usage and utility of the NEW Nexaverse.`,
-    period: '2H 2024',
+    period: '1H 2025',
 })
 
 // 2H 2025
@@ -154,7 +154,7 @@ milestones.value.push({
     title: `#BUIDL Scaling`,
     status: 'planning',
     summary: `Grow usage and support for startups building on Nexa.`,
-    period: '2H 2024',
+    period: '2H 2025',
 })
 
 // 1H 2026
@@ -257,7 +257,7 @@ milestones.value.push({
             </p>
 
             <p class="text-gray-700 text-lg">
-                We're targeting some time after the 1st halvening event in <span class="font-extrabold">Summer/Fall of 2026</span> to reach this very ambitious goal.
+                We're targeting some time after the 1st halvening event in the <span class="font-extrabold">Summer/Fall of 2026</span> to reach this very ambitious goal.
             </p>
 
             <div class="grid grid-cols-2 gap-4 items-center">
