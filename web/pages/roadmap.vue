@@ -1,15 +1,17 @@
 <script setup>
 const milestones = ref([])
 
-// 1H 2023
+// 2H 2022
 
 milestones.value.push({
     id: '30e46179-414c-4673-a2f5-860a8161c3a2',
     title: `Launch NexaJS Library + SDK`,
     status: 'complete',
     summary: `A complete suite of modules and tools for Nexa's JavaScript builders.`,
-    period: '1H 2023',
+    period: '2H 2022',
 })
+
+// 1H 2023
 
 milestones.value.push({
     id: '89de5b8e-f9ad-459d-8fa5-0d3b2366c842',
@@ -181,7 +183,7 @@ milestones.value.push({
             </h1>
 
             <h3 class="text-lg sm:text-2xl">
-                2023 thru 2026
+                2022 thru 2026
             </h3>
         </header>
 
