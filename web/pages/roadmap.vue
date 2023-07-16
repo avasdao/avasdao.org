@@ -248,7 +248,7 @@ milestones.value.push({
         </section>
 
         <section class="mt-10 px-3 sm:px-10 pb-20 flex flex-col items-center gap-6">
-            <h2 class="text-6xl font-extrabold">
+            <h2 class="text-5xl font-extrabold text-rose-600 opacity-50">
                 Penny-a-Nexa
             </h2>
 
