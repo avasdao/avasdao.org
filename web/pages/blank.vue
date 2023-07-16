@@ -6,12 +6,6 @@ useHead({
     ],
 })
 
-/* Initialize stores. */
-import { useSystemStore } from '@/stores/system'
-
-/* Initialize System. */
-const System = useSystemStore()
-
 // onMounted(() => {
 //     console.log('Mounted!')
 //     // Now it's safe to perform setup operations.
@@ -21,7 +15,6 @@ const System = useSystemStore()
 //     console.log('Before Unmount!')
 //     // Now is the time to perform all cleanup operations.
 // })
-
 </script>
 
 <template>
