@@ -4,20 +4,20 @@ const milestones = ref([])
 // 2H 2022
 
 milestones.value.push({
-    id: '30e46179-414c-4673-a2f5-860a8161c3a2',
-    title: `Launch NexaJS Library + SDK`,
+    id: '89de5b8e-f9ad-459d-8fa5-0d3b2366c842',
+    title: `Launch Causes Cash Crowdfunder`,
     status: 'complete',
-    summary: `A complete suite of modules and tools for Nexa's JavaScript builders.`,
+    summary: `Permissionless, non-custodial crowdfunding for individuals and teams to use for raising project funds.`,
     period: '2H 2022',
 })
 
 // 1H 2023
 
 milestones.value.push({
-    id: '89de5b8e-f9ad-459d-8fa5-0d3b2366c842',
-    title: `Launch Causes Cash Crowdfunder`,
+    id: '30e46179-414c-4673-a2f5-860a8161c3a2',
+    title: `Launch NexaJS Library + SDK`,
     status: 'complete',
-    summary: `Permissionless, non-custodial crowdfunding for individuals and teams to use for raising project funds.`,
+    summary: `A complete suite of modules and tools for Nexa's JavaScript builders.`,
     period: '1H 2023',
 })
 
