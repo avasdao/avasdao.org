@@ -1,13 +1,28 @@
 <script setup lang="ts">
-/* Import modules. */
-import { ref } from 'vue'
+/* Define properties. */
+// https://vuejs.org/guide/components/props.html#props-declaration
+const props = defineProps({
+    data: {
+        type: [Object],
+    },
+})
 
-const blank = ref(null)
+// onMounted(() => {
+//     console.log('Mounted!')
+//     // Now it's safe to perform setup operations.
+// })
+
+// onBeforeUnmount(() => {
+//     console.log('Before Unmount!')
+//     // Now is the time to perform all cleanup operations.
+// })
+
 </script>
 
 <template>
-    <main>
-        <h1>Blank</h1>
-
+    <main class="">
+        <h1 class="">
+            Blank
+        </h1>
     </main>
 </template>
