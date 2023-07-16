@@ -253,14 +253,18 @@ milestones.value.push({
             </h2>
 
             <p class="text-gray-700 text-lg">
-                Our team is working tirelessly to support a community effort to <em>eventually</em> raise <span class="font-extrabold">1 $NEXA</span> equal to the value of <span class="font-extrabold">ONE U.S. PENNY ($0.01)</span>.
+                Our team is working tirelessly to support a community effort to <em>eventually</em> raise the value of <span class="font-extrabold">1.0 $NEXA</span> equal to the value of <span class="font-extrabold">ONE U.S. PENNY ($0.01)</span>.
             </p>
 
             <p class="text-gray-700 text-lg">
                 We're targeting some time after the 1st halvening event in <span class="font-extrabold">Summer/Fall of 2026</span> to reach this very ambitious goal.
             </p>
 
-            <img src="~/assets/penny.png" class="w-3/4 sm:w-1/2 h-auto" />
+            <div class="grid grid-cols-2 gap-4 items-center">
+                <img src="~/assets/penny.png" class="w-3/4 mx-auto" />
+
+                <img src="~/assets/nexa.svg" class="" />
+            </div>
         </section>
     </main>
 </template>
