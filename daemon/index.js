@@ -45,6 +45,7 @@ const PRIVATE_KEY_2 = 'f6bbef4f472ee95ec56576e84cfb640eb5e086f67c0bda5463f3e9ccc
 const PRIVATE_KEY_3 = '238990ddf6e84495abf641db1034ed429c3ddfd7808e8bf0900a4ac50fa00323' // nexa:nqtsq5g5sjkqk7wzd9wwh9423rr0tda7m027ryljkfy84cjz
 const NEXA_RECEIVING_ADDRESS = 'nexa:nqtsq5g57qupnngwws0rlvsevggu6zxqc0tmk7d3v5ulpfh6'
 const SATOSHIS = 1337n
+const BASE_PAYOUT_SATOSHIS = 100000000n
 
 /* Instantiate Libauth crypto interfaces. */
 const ripemd160 = await instantiateRipemd160()
@@ -53,6 +54,28 @@ const sha256 = await instantiateSha256()
 
 /* Initialize databases. */
 const groupsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/transactions_group`)
+
+const getAddress = (_scriptPubKey) => {
+    let nexaAddress
+    let scriptPubKey
+
+    scriptPubKey = new Uint8Array([
+        OP.ZERO,
+        OP.ONE,
+        ...encodeDataPush(_scriptPubKey),
+    ])
+    // console.info('\n  Script Public Key:', binToHex(scriptPubKey))
+
+    /* Encode the public key hash into a P2PKH nexa address. */
+    nexaAddress = encodeAddress(
+        'nexa',
+        'TEMPLATE',
+        encodeDataPush(scriptPubKey),
+    )
+    // console.info('\n  Nexa address:', nexaAddress)
+
+    return nexaAddress
+}
 
 const run = async () => {
     let coins
@@ -107,9 +130,37 @@ const run = async () => {
     }
 
     qualified = scripts.filter(_script => {
-        return _script?.hex.slice(-6) === 'c71340' && _script?.group === 'nexa:tptlgmqhvmwqppajq7kduxenwt5ljzcccln8ysn9wdzde540vcqqqcra40x0x'
+        return _script?.scriptHash === '103012FB192C7DC29FAB0BF1126DFCA42106A574' && _script?.hex.slice(-6) === 'c71340' && _script?.group === 'nexa:tptlgmqhvmwqppajq7kduxenwt5ljzcccln8ysn9wdzde540vcqqqcra40x0x'
     })
-    return console.log('QUALIFIED', qualified, qualified.length)
+    // return console.log('QUALIFIED', qualified, qualified.length)
+
+    const totalShare = qualified.reduce(
+        (total, _qualified) => (total + BigInt(_qualified.groupQuantity)), BigInt(0)
+    )
+
+    receivers = qualified.map(_qualified => {
+        const argsHash = _qualified.argsHash
+        const address = getAddress(hexToBin(_qualified.argsHash))
+        const groupQuantity = _qualified.groupQuantity
+        const pct = (_qualified.groupQuantity / Number(totalShare))
+        const pctBI = BigInt(parseInt(pct * 1e8))
+        const satoshis = (BASE_PAYOUT_SATOSHIS * pctBI) / BigInt(1e8)
+
+        return {
+            argsHash,
+            address,
+            groupQuantity,
+            totalShare: totalShare.toString(),
+            pct: (pct * 100), // for display purposes
+            satoshis: satoshis.toString(),
+        }
+    })
+    // console.log('RECEIVERS-1', receivers, receivers.length)
+
+    receivers = receivers.filter(_receiver => {
+        return _receiver.satoshis > BigInt(546)
+    })
+    return console.log('RECEIVERS-2', JSON.stringify(receivers, null, 2), receivers.length, 'of', qualified.length)
 
     for (let i = 0; outputs.length; i++) {
         output = outputs[i]
