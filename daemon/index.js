@@ -51,19 +51,79 @@ const ripemd160 = await instantiateRipemd160()
 const secp256k1 = await instantiateSecp256k1()
 const sha256 = await instantiateSha256()
 
+/* Initialize databases. */
+const groupsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/transactions_group`)
+
 const run = async () => {
     let coins
     let nexaAddress
     let nullData
+    let output
+    let outputs
     let publicKey
     let publicKeyHash
+    let qualified
     let receivers
     let response
     let scriptData
     let scriptPubKey
+    let scripts
     let txResult
+    let txs
     let userData
     let wif
+
+    response = await groupsDb
+        .query('api/byScriptHash', {
+            include_docs: true,
+        })
+        .catch(err => console.error(err))
+    // console.error('RESPONSE', response)
+
+    // txs = response.rows.map(_tx => {
+    //     return _tx.doc
+    // })
+    // console.error('TXS', txs)
+
+    outputs = []
+
+    for (let i = 0; i < response.rows.length; i++) {
+        const row = response.rows[i]
+
+        for (let j = 0; j < row.doc.vout.length; j++) {
+            const vout = row.doc.vout[j]
+
+            outputs.push(vout)
+        }
+    }
+    // return console.error('OUTPUTS', outputs)
+
+    scripts = []
+
+    for (let i = 0; i < outputs.length; i++) {
+        output = outputs[i]
+
+        scripts.push(output.scriptPubKey)
+    }
+
+    qualified = scripts.filter(_script => {
+        return _script?.hex.slice(-6) === 'c71340' && _script?.group === 'nexa:tptlgmqhvmwqppajq7kduxenwt5ljzcccln8ysn9wdzde540vcqqqcra40x0x'
+    })
+    return console.log('QUALIFIED', qualified, qualified.length)
+
+    for (let i = 0; outputs.length; i++) {
+        output = outputs[i]
+
+        console.error('OUTPUT', output)
+        console.error('OUTPUT', output.scriptPubKey?.hex.slice(-6))
+
+        break
+    }
+
+return
+
+
+
 
     /* Encode Private Key WIF. */
     wif = encodePrivateKeyWif(sha256, hexToBin(PRIVATE_KEY), 'mainnet')
