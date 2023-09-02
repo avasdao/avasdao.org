@@ -21,6 +21,8 @@ import {
     hexToBin,
 } from '@nexajs/utils'
 
+import { Wallet } from '@nexajs/wallet'
+
 /* Libauth helpers. */
 import {
     encodeDataPush,
@@ -54,6 +56,7 @@ const sha256 = await instantiateSha256()
 
 /* Initialize databases. */
 const groupsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/transactions_group`)
+const payoutsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/payouts`)
 
 const getAddress = (_scriptPubKey) => {
     let nexaAddress
@@ -170,33 +173,54 @@ const run = async () => {
 
         break
     }
+}
 
-return
+const run2 = async () => {
+    let coins
+    let nexaAddress
+    let nullData
+    let output
+    let outputs
+    let publicKey
+    let publicKeyHash
+    let qualified
+    let receivers
+    let response
+    let scriptData
+    let scriptPubKey
+    let scripts
+    let txResult
+    let txs
+    let userData
+    let wallet
+    let wif
 
 
+    response = await payoutsDb
+        .get('20230901', {
+            include_docs: true,
+        })
+        .catch(err => console.error(err))
+
+    wallet = new Wallet(process.env.MNEMONIC)
 
 
     /* Encode Private Key WIF. */
-    wif = encodePrivateKeyWif(sha256, hexToBin(PRIVATE_KEY), 'mainnet')
-    // console.log('WALLET IMPORT FORMAT', wif)
+    wif = encodePrivateKeyWif(sha256, wallet.privateKey, 'mainnet')
 
     /* Derive the corresponding public key. */
-    publicKey = secp256k1.derivePublicKeyCompressed(hexToBin(PRIVATE_KEY))
-    // console.log('PUBLIC KEY (hex)', binToHex(publicKey))
+    publicKey = secp256k1.derivePublicKeyCompressed(wallet.privateKey)
 
     /* Hash the public key hash according to the P2PKH/P2PKT scheme. */
     scriptData = encodeDataPush(publicKey)
-    // console.log('\n  Script Data:', scriptData)
 
     publicKeyHash = ripemd160.hash(sha256.hash(scriptData))
-    // console.log('PUBLIC KEY HASH (hex)', binToHex(publicKeyHash))
 
     scriptPubKey = new Uint8Array([
         OP.ZERO,
         OP.ONE,
         ...encodeDataPush(publicKeyHash),
     ])
-    console.info('\n  Script Public Key:', binToHex(scriptPubKey))
 
     /* Encode the public key hash into a P2PKH nexa address. */
     nexaAddress = encodeAddress(
@@ -211,36 +235,23 @@ return
     console.log('\n  Coins:', coins)
 
     userData = [
-        'NexaJS\tUnitTest',
-        uuidv4(),
+        `AVAS.cash Payouts! Payouts! Payouts!`,
     ]
 
     /* Initialize hex data. */
     nullData = encodeNullData(userData)
-    // console.log('HEX DATA', nullData)
 
     receivers = [
         {
             data: nullData,
         },
-        {
-            address: NEXA_RECEIVING_ADDRESS,
-            satoshis: SATOSHIS,
-        },
     ]
 
-    userData = [
-        'NexaJS\tUnitTest',
-        uuidv4(),
-    ]
-
-    /* Initialize hex data. */
-    nullData = encodeNullData(userData)
-    // console.log('HEX DATA', nullData)
-
-    /* Add a 2nd data push. */
-    receivers.push({
-        data: nullData,
+    response.receivers.forEach(_receiver => {
+        receivers.push({
+            address: _receiver.address,
+            satoshis: BigInt(_receiver.satoshis),
+        })
     })
 
     // FIXME: FOR DEV PURPOSES ONLY
@@ -248,6 +259,7 @@ return
         address: nexaAddress,
     })
     console.log('\n  Receivers:', receivers)
+// return
 
     /* Send UTXO request. */
     response = await sendCoin(coins, receivers)
