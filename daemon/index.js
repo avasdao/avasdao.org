@@ -197,7 +197,7 @@ const run2 = async () => {
 
 
     response = await payoutsDb
-        .get('20230901', {
+        .get('20230902', {
             include_docs: true,
         })
         .catch(err => console.error(err))
@@ -259,7 +259,7 @@ const run2 = async () => {
         address: nexaAddress,
     })
     console.log('\n  Receivers:', receivers)
-// return
+return
 
     /* Send UTXO request. */
     response = await sendCoin(coins, receivers)
@@ -273,4 +273,4 @@ const run2 = async () => {
     }
 }
 
-run()
+run2()
