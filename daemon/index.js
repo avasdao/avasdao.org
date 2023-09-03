@@ -48,6 +48,7 @@ const PRIVATE_KEY_3 = '238990ddf6e84495abf641db1034ed429c3ddfd7808e8bf0900a4ac50
 const NEXA_RECEIVING_ADDRESS = 'nexa:nqtsq5g57qupnngwws0rlvsevggu6zxqc0tmk7d3v5ulpfh6'
 const SATOSHIS = 1337n
 const BASE_PAYOUT_SATOSHIS = 100000000n
+const DUST_LIMIT = 546n
 
 /* Instantiate Libauth crypto interfaces. */
 const ripemd160 = await instantiateRipemd160()
@@ -82,6 +83,7 @@ const getAddress = (_scriptPubKey) => {
 
 const run = async () => {
     let coins
+    let collated
     let nexaAddress
     let nullData
     let output
@@ -160,19 +162,45 @@ const run = async () => {
     })
     // console.log('RECEIVERS-1', receivers, receivers.length)
 
-    receivers = receivers.filter(_receiver => {
-        return _receiver.satoshis > BigInt(546)
+    /* Initialize collation. */
+    collated = {}
+
+    /* Handle collation. */
+    // NOTE: Group addresses into "total" amount to send.
+    receivers.forEach(_receiver => {
+        if (!collated[_receiver.address]) {
+            collated[_receiver.address] = BigInt(_receiver.satoshis)
+        } else {
+            collated[_receiver.address] = BigInt(_receiver.satoshis) + collated[_receiver.address]
+        }
     })
-    return console.log('RECEIVERS-2', JSON.stringify(receivers, null, 2), receivers.length, 'of', qualified.length)
 
-    for (let i = 0; outputs.length; i++) {
-        output = outputs[i]
+    /* Reset receivers. */
+    receivers = []
 
-        console.error('OUTPUT', output)
-        console.error('OUTPUT', output.scriptPubKey?.hex.slice(-6))
+    Object.keys(collated).forEach(_address => {
+        receivers.push({
+            address: _address,
+            satoshis: collated[_address],
+        })
+    })
 
-        break
-    }
+    /* Filter out receivers with dust. */
+    // NOTE: This could be a very large number, so we don't necessarily want to
+    //       keep track of NULLs.
+    receivers = receivers.filter(_receiver => {
+        return _receiver.satoshis > BigInt(DUST_LIMIT)
+    })
+
+    // NOTE: Map to String from BigInt for JSON support.
+    receivers = receivers.map(_receiver => {
+        return {
+            ..._receiver,
+            satoshis: _receiver.satoshis.toString(),
+        }
+    })
+
+    console.log('RECEIVERS', JSON.stringify(receivers, null, 2), receivers.length, 'of', qualified.length)
 }
 
 const run2 = async () => {
@@ -197,7 +225,7 @@ const run2 = async () => {
 
 
     response = await payoutsDb
-        .get('20230902', {
+        .get('20230903', {
             include_docs: true,
         })
         .catch(err => console.error(err))
@@ -273,4 +301,4 @@ return
     }
 }
 
-run2()
+run()
