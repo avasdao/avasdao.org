@@ -88,6 +88,7 @@ const run = async () => {
     let nullData
     let output
     let outputs
+    let overage
     let publicKey
     let publicKeyHash
     let qualified
@@ -178,11 +179,38 @@ const run = async () => {
     /* Reset receivers. */
     receivers = []
 
+    overage = BigInt(0)
+
     Object.keys(collated).forEach(_address => {
-        receivers.push({
-            address: _address,
-            satoshis: collated[_address],
-        })
+        const pct = 0.08
+        const pctBI = BigInt(parseInt(pct * 1e8))
+        const satoshis = (BASE_PAYOUT_SATOSHIS * pctBI) / BigInt(1e8)
+
+        if (collated[_address] > satoshis) {
+            overage += (collated[_address] - satoshis)
+
+            receivers.push({
+                address: _address,
+                satoshis,
+            })
+        } else {
+            receivers.push({
+                address: _address,
+                satoshis: collated[_address],
+            })
+        }
+    })
+
+    console.log('TOTAL RECEIVERS-1', BigInt(receivers.length));
+
+    console.log('OVERAGE', overage);
+
+    let overageShare = overage / BigInt(receivers.length)
+    console.log('OVERAGE SHARE', overageShare);
+
+    // TODO ADD OVERAGES TO ALL ADDRESSES
+    receivers.forEach(_receiver => {
+        _receiver.satoshis += overageShare
     })
 
     /* Filter out receivers with dust. */
@@ -191,6 +219,8 @@ const run = async () => {
     receivers = receivers.filter(_receiver => {
         return _receiver.satoshis > BigInt(DUST_LIMIT)
     })
+
+    console.log('TOTAL RECEIVERS-2', BigInt(receivers.length));
 
     // NOTE: Map to String from BigInt for JSON support.
     receivers = receivers.map(_receiver => {
@@ -225,7 +255,7 @@ const run2 = async () => {
 
 
     response = await payoutsDb
-        .get('20230903', {
+        .get('20230913', {
             include_docs: true,
         })
         .catch(err => console.error(err))

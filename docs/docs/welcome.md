@@ -1,10 +1,10 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Welcome! Hoş geldin! 欢迎！
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Let's discover Ava's DAO!
 
 ## Getting Started
 

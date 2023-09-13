@@ -36,10 +36,7 @@ const config = {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
-            'https://github.com/avasdao/avasdao.org',
-        },
-        blog: {
-          showReadingTime: true,
+            'https://github.com/avasdao/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -64,11 +61,10 @@ const config = {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Tutorial',
+            label: 'README',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/avasdao/avasdao.org',
+            href: 'https://github.com/avasdao/',
             label: 'GitHub',
             position: 'right',
           },
@@ -81,8 +77,8 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/intro',
+                label: 'README',
+                to: '/readme',
               },
             ],
           },
@@ -107,12 +103,8 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
                 label: 'GitHub',
-                href: 'https://github.com/avasdao/avasdao.org',
+                href: 'https://github.com/avasdao/',
               },
             ],
           },
