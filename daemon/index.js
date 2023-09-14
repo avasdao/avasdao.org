@@ -84,7 +84,6 @@ const getAddress = (_scriptPubKey) => {
 const run = async () => {
     let coins
     let collated
-    let nexaAddress
     let nullData
     let output
     let outputs
@@ -235,7 +234,6 @@ const run = async () => {
 
 const run2 = async () => {
     let coins
-    let nexaAddress
     let nullData
     let output
     let outputs
@@ -247,21 +245,31 @@ const run2 = async () => {
     let scriptData
     let scriptPubKey
     let scripts
+    let todaysData
     let txResult
     let txs
     let userData
     let wallet
     let wif
 
+    todaysData = moment().format('YYYYMMDD')
+    console.log('todaysData' ,todaysData);
 
+    /* Request current Payout data. */
     response = await payoutsDb
-        .get('20230913', {
+        .get(todaysData, {
             include_docs: true,
         })
         .catch(err => console.error(err))
 
-    wallet = new Wallet(process.env.MNEMONIC)
+    /* Validate Payout data response. */
+    if (!response) {
+        throw new Error('Missing Payout data!')
+    }
 
+    /* Initialize Payout wallet. */
+    wallet = new Wallet(process.env.MNEMONIC)
+    console.info('\n  Nexa address:', wallet.address)
 
     /* Encode Private Key WIF. */
     wif = encodePrivateKeyWif(sha256, wallet.privateKey, 'mainnet')
@@ -280,20 +288,14 @@ const run2 = async () => {
         ...encodeDataPush(publicKeyHash),
     ])
 
-    /* Encode the public key hash into a P2PKH nexa address. */
-    nexaAddress = encodeAddress(
-        'nexa',
-        'TEMPLATE',
-        encodeDataPush(scriptPubKey),
-    )
-    console.info('\n  Nexa address:', nexaAddress)
 
     coins = await getCoins(wif)
         .catch(err => console.error(err))
     console.log('\n  Coins:', coins)
 
     userData = [
-        `AVAS.cash Payouts! Payouts! Payouts!`,
+        'AVAS.cash',
+        'Payyyouts! Payyyouts! Payyyouts!',
     ]
 
     /* Initialize hex data. */
@@ -314,21 +316,23 @@ const run2 = async () => {
 
     // FIXME: FOR DEV PURPOSES ONLY
     receivers.push({
-        address: nexaAddress,
+        address: wallet.address,
     })
-    console.log('\n  Receivers:', receivers)
+    console.log('\nRECEIVERS:', receivers, receivers.length)
 return
 
     /* Send UTXO request. */
     response = await sendCoin(coins, receivers)
-    console.log('Send UTXO (response):', response)
+    console.log('\nSend UTXO (response):', response)
 
     try {
         txResult = JSON.parse(response)
-        console.log('TX RESULT', txResult)
+        console.log('\nTX RESULT', txResult)
+
+        // TODO Update database logs
     } catch (err) {
         console.error(err)
     }
 }
 
-run()
+run2()
