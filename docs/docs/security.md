@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Security & Best Practices
+# 🚨 Security & Best Practices 🛡️ 👀
 
 ALWAYS BE CAREFUL WITH YOUR 12/24 WORD SEED PHRASES
 

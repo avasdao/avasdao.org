@@ -64,8 +64,8 @@ const config = {
             label: 'Welcome! Hoş geldin! 欢迎！',
           },
           {
-            href: 'https://github.com/avasdao/',
-            label: 'GitHub',
+            href: 'https://avasdao.org/roadmap',
+            label: 'Roadmap',
             position: 'right',
           },
         ],

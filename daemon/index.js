@@ -335,4 +335,4 @@ return
     }
 }
 
-run2()
+run()

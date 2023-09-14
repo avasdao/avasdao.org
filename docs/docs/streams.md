@@ -2,6 +2,6 @@
 sidebar_position: 4
 ---
 
-# Streams
+# 💸 Streams 📈
 
 _TBD_
