@@ -59,9 +59,9 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'welcome',
             position: 'left',
-            label: 'README',
+            label: 'Welcome! Hoş geldin! 欢迎！',
           },
           {
             href: 'https://github.com/avasdao/',
