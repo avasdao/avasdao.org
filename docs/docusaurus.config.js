@@ -77,8 +77,8 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'README',
-                to: '/readme',
+                label: 'Welcome! Hoş geldin! 欢迎！',
+                to: '/welcome',
               },
             ],
           },
@@ -95,7 +95,7 @@ const config = {
               },
               {
                 label: 'Twitter',
-                href: 'https://twitter.com/0xShomari',
+                href: 'https://twitter.com/AvasDAO',
               },
             ],
           },
