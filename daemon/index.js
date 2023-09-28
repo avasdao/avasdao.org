@@ -82,6 +82,7 @@ const getAddress = (_scriptPubKey) => {
 }
 
 const run = async () => {
+    /* Initialize locals. */
     let coins
     let collated
     let nullData
@@ -106,13 +107,11 @@ const run = async () => {
             include_docs: true,
         })
         .catch(err => console.error(err))
-    // console.error('RESPONSE', response)
+    // return console.error('RESPONSE', response)
 
-    // txs = response.rows.map(_tx => {
-    //     return _tx.doc
-    // })
-    // console.error('TXS', txs)
+    // TODO RUN QUERY BY (SCRIPTHASH + GROUPID)
 
+    /* Initialize outputs. */
     outputs = []
 
     for (let i = 0; i < response.rows.length; i++) {
@@ -126,6 +125,7 @@ const run = async () => {
     }
     // return console.error('OUTPUTS', outputs)
 
+    /* Initialize scripts. */
     scripts = []
 
     for (let i = 0; i < outputs.length; i++) {
@@ -133,9 +133,12 @@ const run = async () => {
 
         scripts.push(output.scriptPubKey)
     }
+    // return console.error('SCRIPTS', scripts)
 
     qualified = scripts.filter(_script => {
-        return _script?.scriptHash === '103012FB192C7DC29FAB0BF1126DFCA42106A574' && _script?.hex.slice(-6) === 'c71340' && _script?.group === 'nexa:tptlgmqhvmwqppajq7kduxenwt5ljzcccln8ysn9wdzde540vcqqqcra40x0x'
+        return (_script?.scriptHash?.toLowerCase() === '103012fb192c7dc29fab0bf1126dfca42106a574') &&
+            (_script?.hex.slice(-6) === 'c71340') &&
+            (_script?.group === 'nexa:tptlgmqhvmwqppajq7kduxenwt5ljzcccln8ysn9wdzde540vcqqqcra40x0x')
     })
     // return console.log('QUALIFIED', qualified, qualified.length)
 
@@ -233,6 +236,7 @@ const run = async () => {
 }
 
 const run2 = async () => {
+    /* Initialize locals. */
     let coins
     let nullData
     let output
@@ -252,8 +256,9 @@ const run2 = async () => {
     let wallet
     let wif
 
+    /* Set today's date. */
     todaysData = moment().format('YYYYMMDD')
-    console.log('todaysData' ,todaysData);
+    console.log(`\nToday'sData`, todaysData)
 
     /* Request current Payout data. */
     response = await payoutsDb
@@ -273,21 +278,6 @@ const run2 = async () => {
 
     /* Encode Private Key WIF. */
     wif = encodePrivateKeyWif(sha256, wallet.privateKey, 'mainnet')
-
-    /* Derive the corresponding public key. */
-    publicKey = secp256k1.derivePublicKeyCompressed(wallet.privateKey)
-
-    /* Hash the public key hash according to the P2PKH/P2PKT scheme. */
-    scriptData = encodeDataPush(publicKey)
-
-    publicKeyHash = ripemd160.hash(sha256.hash(scriptData))
-
-    scriptPubKey = new Uint8Array([
-        OP.ZERO,
-        OP.ONE,
-        ...encodeDataPush(publicKeyHash),
-    ])
-
 
     coins = await getCoins(wif)
         .catch(err => console.error(err))
