@@ -20,7 +20,7 @@ function HomepageHeader() {
                         className="button button--secondary button--lg"
                         to="/welcome"
                     >
-                        Campaign Setup Tutorial - 5min ⏱️
+                        Quick Intro to the DAO - 5min ⏱️
                     </Link>
                 </div>
             </div>
