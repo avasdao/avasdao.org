@@ -6,7 +6,11 @@ sidebar_position: 3
 
 Receive Payouts each and every day at 04:20 UTC.
 
+Payouts are made with assets collected from [Streams](/streams).
+
 :::tip
 
-Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
+__Did you know?__
+
+The more $AVAS you stake, the larger your daily payouts.
 :::
