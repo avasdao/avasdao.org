@@ -8,7 +8,7 @@ Upgrade your service plan by setting a stakeline.
 
 :::info
 
-__Did you know?__
+__You should know?__
 
 You will still receive ALL airdrops reserved exclusively for $AVAS stakers.
 :::

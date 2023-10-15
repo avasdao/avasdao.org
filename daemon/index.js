@@ -309,7 +309,7 @@ const run2 = async () => {
         address: wallet.address,
     })
     console.log('\nRECEIVERS:', receivers, receivers.length)
-// return
+return
 
     /* Send UTXO request. */
     response = await sendCoin(coins, receivers)
@@ -325,4 +325,4 @@ const run2 = async () => {
     }
 }
 
-run2()
+run()
