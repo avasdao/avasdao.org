@@ -56,7 +56,7 @@ const secp256k1 = await instantiateSecp256k1()
 const sha256 = await instantiateSha256()
 
 /* Initialize databases. */
-const groupsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/transactions_group`)
+const groupTxsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/group_txs`)
 const payoutsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/payouts`)
 
 const getAddress = (_scriptPubKey) => {
@@ -102,7 +102,7 @@ const run = async () => {
     let userData
     let wif
 
-    response = await groupsDb
+    response = await groupTxsDb
         .query('api/byScriptHash', {
             include_docs: true,
         })
@@ -309,7 +309,7 @@ const run2 = async () => {
         address: wallet.address,
     })
     console.log('\nRECEIVERS:', receivers, receivers.length)
-return
+// return
 
     /* Send UTXO request. */
     response = await sendCoin(coins, receivers)
@@ -325,4 +325,4 @@ return
     }
 }
 
-run()
+run2()

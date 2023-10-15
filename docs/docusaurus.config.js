@@ -44,6 +44,10 @@ const config = {
         ],
     ],
 
+    plugins: [
+        'docusaurus-plugin-matomo',
+    ],
+
     themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -112,6 +116,12 @@ const config = {
         prism: {
             theme: lightCodeTheme,
             darkTheme: darkCodeTheme,
+        },
+        matomo: {
+            matomoUrl: '//matomo.avasdao.org/',
+            siteId: '1',
+            phpLoader: 'matomo.php',
+            jsLoader: 'matomo.js',
         },
     }),
 }
