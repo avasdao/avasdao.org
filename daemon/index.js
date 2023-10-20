@@ -1,4 +1,5 @@
 import moment from 'moment'
+import fetch from 'node-fetch'
 import PouchDB from 'pouchdb'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -56,7 +57,6 @@ const secp256k1 = await instantiateSecp256k1()
 const sha256 = await instantiateSha256()
 
 /* Initialize databases. */
-const groupTxsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/group_txs`)
 const payoutsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/payouts`)
 
 const getAddress = (_scriptPubKey) => {
@@ -102,38 +102,67 @@ const run = async () => {
     let userData
     let wif
 
-    response = await groupTxsDb
-        .query('api/byScriptHash', {
-            include_docs: true,
+    /* Set Nexa GraphQL endpoint. */
+    const ENDPOINT = 'https://nexa.sh/graphql'
+
+    const query = `
+    {
+      script(first: 1000) {
+        edges {
+          node {
+            txidem
+            vout {
+              scriptPubKey {
+                hex
+                type
+                scriptHash
+                argsHash
+                group
+                groupQuantity
+              }
+            }
+          }
+        }
+      }
+    }
+    `
+
+    /* Make query request. */
+    response = await fetch(ENDPOINT,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({ query }),
         })
         .catch(err => console.error(err))
-    // return console.error('RESPONSE', response)
+
+    /* Parse JSON. */
+    response = await response.json()
+    // return console.log('RESPONSE (edges):', response.data.script.edges)
+
+    /* Handle outputs. */
+    outputs = response.data.script.edges.map(_edge => {
+        return _edge.node.vout
+    })
+    // return console.log('OUTPUTS', outputs);
 
     // TODO RUN QUERY BY (SCRIPTHASH + GROUPID)
-
-    /* Initialize outputs. */
-    outputs = []
-
-    for (let i = 0; i < response.rows.length; i++) {
-        const row = response.rows[i]
-
-        for (let j = 0; j < row.doc.vout.length; j++) {
-            const vout = row.doc.vout[j]
-
-            outputs.push(vout)
-        }
-    }
-    // return console.error('OUTPUTS', outputs)
 
     /* Initialize scripts. */
     scripts = []
 
+    /* Handle scripts. */
     for (let i = 0; i < outputs.length; i++) {
         output = outputs[i]
 
-        scripts.push(output.scriptPubKey)
+        for (let j = 0; j < output.length; j++) {
+            scripts.push(output[j].scriptPubKey)
+        }
     }
-    // return console.error('SCRIPTS', scripts)
+    // return console.error('SCRIPTS', scripts, scripts.length)
 
     qualified = scripts.filter(_script => {
         return (_script?.scriptHash?.toLowerCase() === '103012fb192c7dc29fab0bf1126dfca42106a574') &&
@@ -163,7 +192,7 @@ const run = async () => {
             satoshis: satoshis.toString(),
         }
     })
-    // console.log('RECEIVERS-1', receivers, receivers.length)
+    // return console.log('RECEIVERS-1', receivers, receivers.length)
 
     /* Initialize collation. */
     collated = {}
