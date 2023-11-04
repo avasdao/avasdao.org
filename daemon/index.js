@@ -97,10 +97,28 @@ const run = async () => {
     let scriptData
     let scriptPubKey
     let scripts
+    let todaysDate
     let txResult
     let txs
     let userData
     let wif
+
+    /* Set today's date. */
+    todaysDate = moment().format('YYYYMMDD')
+    console.log(`\nToday'sData`, todaysDate)
+
+    /* Request current Payout data. */
+    response = await payoutsDb
+        .get(todaysDate, {
+            include_docs: true,
+        })
+        .catch(err => console.error(err))
+
+    /* Validate Payout data response. */
+    if (response) {
+        console.error(response)
+        throw new Error('Already found payout data for today!')
+    }
 
     /* Set Nexa GraphQL endpoint. */
     const ENDPOINT = 'https://nexa.sh/graphql'
@@ -262,6 +280,18 @@ const run = async () => {
     })
 
     console.log('RECEIVERS', JSON.stringify(receivers, null, 2), receivers.length, 'of', qualified.length)
+
+    const pkg = {
+        _id: todaysDate,
+        receivers,
+        createdAt: moment().unix(),
+    }
+
+    /* Request current Payout data. */
+    response = await payoutsDb
+        .put(pkg)
+        .catch(err => console.error(err))
+    console.log('RESPONSE', response)
 }
 
 const run2 = async () => {
@@ -278,7 +308,7 @@ const run2 = async () => {
     let scriptData
     let scriptPubKey
     let scripts
-    let todaysData
+    let todaysDate
     let txResult
     let txs
     let userData
@@ -286,12 +316,12 @@ const run2 = async () => {
     let wif
 
     /* Set today's date. */
-    todaysData = moment().format('YYYYMMDD')
-    console.log(`\nToday'sData`, todaysData)
+    todaysDate = moment().format('YYYYMMDD')
+    console.log(`\nToday'sData`, todaysDate)
 
     /* Request current Payout data. */
     response = await payoutsDb
-        .get(todaysData, {
+        .get(todaysDate, {
             include_docs: true,
         })
         .catch(err => console.error(err))
