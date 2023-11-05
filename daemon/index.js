@@ -368,7 +368,7 @@ const run2 = async () => {
         address: wallet.address,
     })
     console.log('\nRECEIVERS:', receivers, receivers.length)
-return
+// return
 
     /* Send UTXO request. */
     response = await sendCoin(coins, receivers)
@@ -384,4 +384,9 @@ return
     }
 }
 
-run()
+/* Validate CLI arguments. */
+if (process.argv[2] === 'live') {
+    run2()
+} else {
+    run()
+}
