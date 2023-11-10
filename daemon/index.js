@@ -1,5 +1,6 @@
 import moment from 'moment'
 import fetch from 'node-fetch'
+import nodemailer from 'nodemailer'
 import PouchDB from 'pouchdb'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -59,6 +60,17 @@ const sha256 = await instantiateSha256()
 /* Initialize databases. */
 const payoutsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/payouts`)
 
+/* Initialize transporter. */
+const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST || 'smtp.forwardemail.net',
+    port: process.env.SMTP_PORT || 465, // SSL is recommeded over TLS/STARTTLS
+    secure: true,
+    auth: {
+        user: process.env.SMTP_USER || '',
+        pass: process.env.SMTP_PASS || '',
+    },
+})
+
 const getAddress = (_scriptPubKey) => {
     let nexaAddress
     let scriptPubKey
@@ -79,6 +91,21 @@ const getAddress = (_scriptPubKey) => {
     // console.info('\n  Nexa address:', nexaAddress)
 
     return nexaAddress
+}
+
+const sendMail = async (_text, _html) => {
+    /* Send mail. */
+    const info = await transporter.sendMail({
+        from: `"Ava Support" <support@avasdao.org>`, // sender address
+        to: `info@hos.im, shomari@avasdao.org`,
+        subject: `Ava Daemon Notification`, // Subject line
+        text: _text,
+        html: _html,
+    })
+    console.log('MESSAGE INFO', info)
+
+    /* Return message id. */
+    return info.messageId
 }
 
 const run = async () => {
@@ -117,7 +144,11 @@ const run = async () => {
     /* Validate Payout data response. */
     if (response) {
         console.error(response)
-        throw new Error('Already found payout data for today!')
+
+        const messageid = await sendMail(`ERROR! Already processed payout data for [ ${todaysDate} ]`, null)
+        console.log('ERROR MAIL SENT', messageid)
+
+        throw new Error('Already processed payout data for today!')
     }
 
     /* Set Nexa GraphQL endpoint. */
@@ -287,11 +318,28 @@ const run = async () => {
         createdAt: moment().unix(),
     }
 
-    /* Request current Payout data. */
-    response = await payoutsDb
-        .put(pkg)
-        .catch(err => console.error(err))
-    console.log('RESPONSE', response)
+    /* Set mail body. */
+    const mailBody = `
+Payyyouts Daemon is running for [ ${todaysDate} ]
+Run at: ${moment().format('llll')}
+
+# Receivers: ${receivers.length}
+
+TODO: Show pending payout balance
+    `
+
+    /* Send mail. */
+    const messageid = await sendMail(mailBody, null)
+    console.log('MESSAGE ID', messageid)
+
+    /* Validate message id. */
+    if (messageid) {
+        /* Request current Payout data. */
+        response = await payoutsDb
+            .put(pkg)
+            .catch(err => console.error(err))
+        console.log('RESPONSE', response)
+    }
 }
 
 const run2 = async () => {
@@ -377,6 +425,26 @@ const run2 = async () => {
     try {
         txResult = JSON.parse(response)
         console.log('\nTX RESULT', txResult)
+
+        /* Set mail body. */
+        const mailBody = `
+Payyyouts Daemon is running for [ ${todaysDate} ]
+Run at: ${moment().format('llll')}
+
+https://nexa.sh/tx/${txResult?.result}
+
+TODO: Show next payout balance
+
+---
+
+${response}
+
+---
+        `
+
+        /* Send mail. */
+        const messageid = await sendMail(mailBody, null)
+        console.log('MESSAGE ID', messageid)
 
         // TODO Update database logs
     } catch (err) {
