@@ -13,6 +13,8 @@ import {
 
 import { broadcast } from '@nexajs/provider'
 
+import { getAddressBalance } from '@nexajs/rostrum'
+
 import {
     encodeNullData,
     OP,
@@ -42,13 +44,8 @@ import {
     sendCoin,
 } from '@nexajs/purse'
 
-/* Set (test) constants. */
-const PRIVATE_KEY = 'baa017c1c3458fc80c31c7b5a2ce833a3af44d3c172bff3981103d272f9a5a3c' // nexa:nqtsq5g5sjkqk7wzd9wwh9423rr0tda7m027ryljkfy84cjz
-const PRIVATE_KEY_1 = 'ab93ef31c3de84f33d6a7c96a85b13f5653e93e014d5eba30f2a2353dc2b8af7' // nexa:nqtsq5g5sjkqk7wzd9wwh9423rr0tda7m027ryljkfy84cjz
-const PRIVATE_KEY_2 = 'f6bbef4f472ee95ec56576e84cfb640eb5e086f67c0bda5463f3e9ccc84b5f32' // nexa:nqtsq5g5sjkqk7wzd9wwh9423rr0tda7m027ryljkfy84cjz
-const PRIVATE_KEY_3 = '238990ddf6e84495abf641db1034ed429c3ddfd7808e8bf0900a4ac50fa00323' // nexa:nqtsq5g5sjkqk7wzd9wwh9423rr0tda7m027ryljkfy84cjz
-const NEXA_RECEIVING_ADDRESS = 'nexa:nqtsq5g57qupnngwws0rlvsevggu6zxqc0tmk7d3v5ulpfh6'
-const SATOSHIS = 1337n
+/* Set constants. */
+const BASE_PAYOUT_ADDRESS = 'nexa:nqtsq5g5sp33aj07d808w8xvv7kuarwcrv3z2fvskw2ej7dj'
 const BASE_PAYOUT_SATOSHIS = 100000000n
 const DUST_LIMIT = 546n
 
@@ -110,12 +107,14 @@ const sendMail = async (_text, _html) => {
 
 const run = async () => {
     /* Initialize locals. */
+    let balance
     let coins
     let collated
     let nullData
     let output
     let outputs
     let overage
+    let pkg
     let publicKey
     let publicKeyHash
     let qualified
@@ -312,20 +311,27 @@ const run = async () => {
 
     console.log('RECEIVERS', JSON.stringify(receivers, null, 2), receivers.length, 'of', qualified.length)
 
-    const pkg = {
+    pkg = {
         _id: todaysDate,
         receivers,
         createdAt: moment().unix(),
     }
 
+    balance = await getAddressBalance(BASE_PAYOUT_ADDRESS)
+        .catch(err => console.error(err))
+    // console.log('BALANCE', balance)
+
     /* Set mail body. */
     const mailBody = `
-Payyyouts Daemon is running for [ ${todaysDate} ]
-Run at: ${moment().format('llll')}
+  Payyyouts Daemon is running for
+  [ ${todaysDate} ]
 
-# Receivers: ${receivers.length}
+           Started at : ${moment().format('llll')}
 
-TODO: Show pending payout balance
+          # Receivers : ${receivers.length}
+
+  Balance (confirmed) : ${balance?.confirmed}
+Balance (unconfirmed) : ${balance?.unconfirmed}
     `
 
     /* Send mail. */
