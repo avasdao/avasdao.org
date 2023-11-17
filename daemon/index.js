@@ -1,4 +1,6 @@
+/* Import modules. */
 import moment from 'moment'
+import numeral from 'numeral'
 import fetch from 'node-fetch'
 import nodemailer from 'nodemailer'
 import PouchDB from 'pouchdb'
@@ -68,6 +70,11 @@ const transporter = nodemailer.createTransport({
     },
 })
 
+/**
+ * Get Address
+ *
+ * Retrieve an address from its script public key.
+ */
 const getAddress = (_scriptPubKey) => {
     let nexaAddress
     let scriptPubKey
@@ -90,6 +97,11 @@ const getAddress = (_scriptPubKey) => {
     return nexaAddress
 }
 
+/**
+ * Send Mail
+ *
+ * Sends an email in both (text and HTML) formats.
+ */
 const sendMail = async (_text, _html) => {
     /* Send mail. */
     const info = await transporter.sendMail({
@@ -105,11 +117,17 @@ const sendMail = async (_text, _html) => {
     return info.messageId
 }
 
-const run = async () => {
+/**
+ * Setup
+ *
+ * Primary setup for the Payouts.
+ */
+const setup = async () => {
     /* Initialize locals. */
     let balance
     let coins
     let collated
+    let messageid
     let nullData
     let output
     let outputs
@@ -144,7 +162,7 @@ const run = async () => {
     if (response) {
         console.error(response)
 
-        const messageid = await sendMail(`ERROR! Already processed payout data for [ ${todaysDate} ]`, null)
+        messageid = await sendMail(`ERROR! Already processed payout data for [ ${todaysDate} ]`, null)
         console.log('ERROR MAIL SENT', messageid)
 
         throw new Error('Already processed payout data for today!')
@@ -323,19 +341,19 @@ const run = async () => {
 
     /* Set mail body. */
     const mailBody = `
-  Payyyouts Daemon is running for
-  [ ${todaysDate} ]
+Payyyouts Daemon is running for
+[ ${todaysDate} ]
 
-           Started at : ${moment().format('llll')}
+Started at: ${moment().format('llll')}
 
-          # Receivers : ${receivers.length}
+# Receivers: ${receivers.length}
 
-  Balance (confirmed) : ${balance?.confirmed}
-Balance (unconfirmed) : ${balance?.unconfirmed}
+Balance (confirmed): ${numeral(balance?.confirmed / 100.0).format('0,0.00')}
+Balance (unconfirmed): ${balance?.unconfirmed}
     `
 
     /* Send mail. */
-    const messageid = await sendMail(mailBody, null)
+    messageid = await sendMail(mailBody, null)
     console.log('MESSAGE ID', messageid)
 
     /* Validate message id. */
@@ -348,9 +366,10 @@ Balance (unconfirmed) : ${balance?.unconfirmed}
     }
 }
 
-const run2 = async () => {
+const basePayout = async () => {
     /* Initialize locals. */
     let coins
+    let messageid
     let nullData
     let output
     let outputs
@@ -439,8 +458,6 @@ Run at: ${moment().format('llll')}
 
 https://nexa.sh/tx/${txResult?.result}
 
-TODO: Show next payout balance
-
 ---
 
 ${response}
@@ -449,7 +466,7 @@ ${response}
         `
 
         /* Send mail. */
-        const messageid = await sendMail(mailBody, null)
+        messageid = await sendMail(mailBody, null)
         console.log('MESSAGE ID', messageid)
 
         // TODO Update database logs
@@ -459,8 +476,9 @@ ${response}
 }
 
 /* Validate CLI arguments. */
+// TODO Split into "Base" and "Stream" payouts.
 if (process.argv[2] === 'live') {
-    run2()
+    basePayout()
 } else {
-    run()
+    setup()
 }
