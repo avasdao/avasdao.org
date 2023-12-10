@@ -13,7 +13,24 @@ import {
     parseWif,
 } from '@nexajs/hdnode'
 
+/* Libauth helpers. */
+import {
+    encodeDataPush,
+    instantiateRipemd160,
+    instantiateSecp256k1,
+    instantiateSha256,
+} from '@bitauth/libauth'
+
 import { broadcast } from '@nexajs/provider'
+
+/* Import class. */
+// import { Purse } from '@nexajs/purse'
+
+/* Import library modules. */
+import {
+    getCoins,
+    sendCoin,
+} from '@nexajs/purse'
 
 import { getAddressBalance } from '@nexajs/rostrum'
 
@@ -29,27 +46,12 @@ import {
 
 import { Wallet } from '@nexajs/wallet'
 
-/* Libauth helpers. */
-import {
-    encodeDataPush,
-    instantiateRipemd160,
-    instantiateSecp256k1,
-    instantiateSha256,
-} from '@bitauth/libauth'
-
-/* Import class. */
-import { Purse } from '@nexajs/purse'
-
-/* Import library modules. */
-import {
-    getCoins,
-    sendCoin,
-} from '@nexajs/purse'
-
 /* Set constants. */
 const BASE_PAYOUT_ADDRESS = 'nexa:nqtsq5g5sp33aj07d808w8xvv7kuarwcrv3z2fvskw2ej7dj'
 const BASE_PAYOUT_SATOSHIS = 100000000n
 const DUST_LIMIT = 546n
+const TX_GROUP_LIMIT = 250
+const TRANSACTION_INTERVAL_DELAY = 5000 // 5 seconds delay
 
 /* Instantiate Libauth crypto interfaces. */
 const ripemd160 = await instantiateRipemd160()
@@ -58,6 +60,8 @@ const sha256 = await instantiateSha256()
 
 /* Initialize databases. */
 const payoutsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/payouts`)
+
+const sleep = ms => new Promise(r => setTimeout(r, ms))
 
 /* Initialize transporter. */
 const transporter = nodemailer.createTransport({
@@ -373,6 +377,8 @@ const basePayout = async () => {
     let nullData
     let output
     let outputs
+    let payoutGroupIdx
+    let payoutGroups
     let publicKey
     let publicKeyHash
     let qualified
@@ -398,6 +404,7 @@ const basePayout = async () => {
             include_docs: true,
         })
         .catch(err => console.error(err))
+    console.log('# RECEIVERS', response.receivers.length);
 
     /* Validate Payout data response. */
     if (!response) {
@@ -411,48 +418,67 @@ const basePayout = async () => {
     /* Encode Private Key WIF. */
     wif = encodePrivateKeyWif(sha256, wallet.privateKey, 'mainnet')
 
-    coins = await getCoins(wif)
-        .catch(err => console.error(err))
-    console.log('\n  Coins:', coins)
+    /* Initialize transaction groups. */
+    payoutGroups = []
 
-    userData = [
-        'AVAS.cash',
-        'Payyyouts! Payyyouts! Payyyouts!',
-    ]
+    /* Split transaction(s) into group(s). */
+    for (let i = 0; i < response.receivers.length; i++) {
+        payoutGroupIdx = Math.floor(i / TX_GROUP_LIMIT)
+        // console.log('GROUP INDEX', payoutGroupIdx);
 
-    /* Initialize hex data. */
-    nullData = encodeNullData(userData)
+        if (!payoutGroups[payoutGroupIdx]) {
+            payoutGroups[payoutGroupIdx] = []
+        }
 
-    receivers = [
-        {
-            data: nullData,
-        },
-    ]
+        payoutGroups[payoutGroupIdx].push(response.receivers[i])
+    }
+    console.log('# PAYOUT GROUPS', payoutGroups.length);
 
-    response.receivers.forEach(_receiver => {
-        receivers.push({
-            address: _receiver.address,
-            satoshis: BigInt(_receiver.satoshis),
+    for (let i = 0; i < payoutGroups.length; i++) {
+        coins = await getCoins(wif)
+            .catch(err => console.error(err))
+        console.log('\n  Coins:', coins)
+
+        userData = [
+            'AVAS.cash',
+            'Payyyouts! Payyyouts! Payyyouts!',
+        ]
+
+        /* Initialize hex data. */
+        nullData = encodeNullData(userData)
+
+        receivers = [
+            {
+                data: nullData,
+            },
+        ]
+
+        // response.receivers.forEach(_receiver => {
+        payoutGroups[i].forEach(_receiver => {
+            receivers.push({
+                address: _receiver.address,
+                satoshis: BigInt(_receiver.satoshis),
+            })
         })
-    })
 
-    // FIXME: FOR DEV PURPOSES ONLY
-    receivers.push({
-        address: wallet.address,
-    })
-    console.log('\nRECEIVERS:', receivers, receivers.length)
-// return
+        // FIXME: FOR DEV PURPOSES ONLY
+        receivers.push({
+            address: wallet.address,
+        })
+        console.log('\nRECEIVERS:', receivers, receivers.length)
+// await sleep(TRANSACTION_INTERVAL_DELAY)
+// continue
 
-    /* Send UTXO request. */
-    response = await sendCoin(coins, receivers)
-    console.log('\nSend UTXO (response):', response)
+        /* Send UTXO request. */
+        response = await sendCoin(coins, receivers)
+        console.log('\nSend UTXO (response):', response)
 
-    try {
-        txResult = JSON.parse(response)
-        console.log('\nTX RESULT', txResult)
+        try {
+            txResult = JSON.parse(response)
+            console.log('\nTX RESULT', txResult)
 
-        /* Set mail body. */
-        const mailBody = `
+            /* Set mail body. */
+            const mailBody = `
 Payyyouts Daemon is running for [ ${todaysDate} ]
 Run at: ${moment().format('llll')}
 
@@ -463,15 +489,20 @@ https://nexa.sh/tx/${txResult?.result}
 ${response}
 
 ---
-        `
+            `
 
-        /* Send mail. */
-        messageid = await sendMail(mailBody, null)
-        console.log('MESSAGE ID', messageid)
+            /* Send mail. */
+            messageid = await sendMail(mailBody, null)
+            console.log('MESSAGE ID', messageid)
 
-        // TODO Update database logs
-    } catch (err) {
-        console.error(err)
+            // TODO Update database logs
+        } catch (err) {
+            console.error(err)
+        }
+
+
+        /* Transaction interval delay. */
+        await sleep(TRANSACTION_INTERVAL_DELAY)
     }
 }
 

@@ -33,7 +33,8 @@ Stakelines are the BEST way to retain 100% control over your precious assets whi
   "info": "Studio Pro Stakeline (valid until: 2024.06.21 @ 13:37:00 GMT)",
   "bindata": null,
   "data": {
-    "stakelineid": "7f3751c5-8c77-4ca9-84bb-59345a9d71b5",
+    "serviceid": "studio-pro",
+    "stakeid": "7f3751c5-8c77-4ca9-84bb-59345a9d71b5",
     "expiresAt": 1718977020
   },
   "license": "This work is licensed under Attribution-NonCommercial-NoDerivatives 4.0 International"
