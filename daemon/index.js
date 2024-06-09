@@ -153,7 +153,7 @@ const setup = async () => {
 
     /* Set today's date. */
     todaysDate = moment().format('YYYYMMDD')
-    console.log(`\nToday'sData`, todaysDate)
+    console.log(`\nToday's Date`, todaysDate)
 
     /* Request current Payout data. */
     response = await payoutsDb
@@ -396,7 +396,7 @@ const basePayout = async () => {
 
     /* Set today's date. */
     todaysDate = moment().format('YYYYMMDD')
-    console.log(`\nToday'sData`, todaysDate)
+    console.log(`\nToday's Date`, todaysDate)
 
     /* Request current Payout data. */
     response = await payoutsDb
