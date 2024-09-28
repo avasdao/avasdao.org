@@ -1,17 +1,16 @@
 {
   "name": "avas-daemon",
-  "version": "23.11.9",
-  "description": "Handle administrative tasks for Ava's DAO.",
+  "version": "24.9.27",
+  "description": "Handle ALL administrative tasks for Ava's DAO.",
   "main": "index.js",
   "type": "module",
   "license": "MIT",
   "dependencies": {
-    "@bitauth/libauth": "1.19.1",
     "moment": "2.29.4",
-    "nexajs": "23.8.30",
+    "nexajs": "24.9.25",
     "nodemailer": "6.9.7",
     "numeral": "2.0.6",
-    "pouchdb": "8.0.1",
-    "uuid": "9.0.0"
+    "pouchdb": "9.0.0",
+    "uuid": "10.0.0"
   }
 }

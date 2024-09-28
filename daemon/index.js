@@ -7,44 +7,56 @@ import PouchDB from 'pouchdb'
 import { v4 as uuidv4 } from 'uuid'
 
 import { encodeAddress } from '@nexajs/address'
-
 import {
     encodePrivateKeyWif,
     parseWif,
 } from '@nexajs/hdnode'
-
-/* Libauth helpers. */
-import {
-    encodeDataPush,
-    instantiateRipemd160,
-    instantiateSecp256k1,
-    instantiateSha256,
-} from '@bitauth/libauth'
-
 import { broadcast } from '@nexajs/provider'
-
-/* Import class. */
-// import { Purse } from '@nexajs/purse'
-
-/* Import library modules. */
 import {
     getCoins,
     sendCoin,
 } from '@nexajs/purse'
-
-import { getAddressBalance } from '@nexajs/rostrum'
-
 import {
+    encodeDataPush
     encodeNullData,
     OP,
 } from '@nexajs/script'
-
 import {
     binToHex,
     hexToBin,
 } from '@nexajs/utils'
-
 import { Wallet } from '@nexajs/wallet'
+
+/* Set (REST) API endpoints. */
+const ROSTRUM_ENDPOINT = 'https://nexa.sh/v1/rostrum'
+
+/* Set constants. */
+const ROSTRUM_METHOD = 'POST'
+
+/* Initialize globals. */
+let body
+let response
+
+const headers = new Headers()
+headers.append('Content-Type', 'application/json')
+
+const getAddressBalance = async (_address) => {
+    body = JSON.stringify({
+        request: 'blockchain.address.get_balance',
+        params: _address,
+    })
+
+    // NOTE: Native `fetch` requires Node v21+.
+    response = await fetch(ROSTRUM_ENDPOINT, {
+        method: ROSTRUM_METHOD,
+        headers,
+        body,
+    }).catch(err => console.error(err))
+    response = await response.json()
+    // console.log('RESPONSE', response)
+
+    return response
+}
 
 /* Set constants. */
 const BASE_PAYOUT_ADDRESS = 'nexa:nqtsq5g5sp33aj07d808w8xvv7kuarwcrv3z2fvskw2ej7dj'
@@ -52,11 +64,6 @@ const BASE_PAYOUT_SATOSHIS = 100000000n
 const DUST_LIMIT = 546n
 const TX_GROUP_LIMIT = 250
 const TRANSACTION_INTERVAL_DELAY = 5000 // 5 seconds delay
-
-/* Instantiate Libauth crypto interfaces. */
-const ripemd160 = await instantiateRipemd160()
-const secp256k1 = await instantiateSecp256k1()
-const sha256 = await instantiateSha256()
 
 /* Initialize databases. */
 const payoutsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/payouts`)
