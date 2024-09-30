@@ -29,7 +29,7 @@ export default async (_text, _html) => {
 
     /* Send mail. */
     const info = await transporter.sendMail(params)
-    console.log('SENDMAIL (info)', info)
+    // console.log('SENDMAIL (info)', info)
 
     /* Return message id. */
     return info.messageId

@@ -3,9 +3,10 @@ import moment from 'moment'
 import PouchDB from 'pouchdb'
 
 import { encodePrivateKeyWif } from '@nexajs/hdnode'
+import { broadcast } from '@nexajs/provider'
 import {
+    buildCoins,
     getCoins,
-    sendCoins,
 } from '@nexajs/purse'
 import { encodeNullData } from '@nexajs/script'
 import { sleep } from '@nexajs/utils'
@@ -52,7 +53,7 @@ export default async () => {
 
 /* Set today's date. */
 // FIXME: Pull the NEXT date from database.
-payoutsDate = '20240920'//moment().format('YYYYMMDD')
+payoutsDate = '20240923'//moment().format('YYYYMMDD')
 console.log(`\n  Today's Date`, payoutsDate)
 
     /* Request current Payout data. */
@@ -128,12 +129,18 @@ console.log(`\n  Today's Date`, payoutsDate)
 // await sleep(TX_INTERVAL_DELAY)
 // continue
 
-        /* Send UTXO request. */
-        txResult = await sendCoins(coins, receivers)
-        console.log('\nTX RESULT', response)
+        /* Send coins. */
+        response = await buildCoins(coins, receivers)
+        console.log('\nRAW TX', response.hex)
+// return
+        txResult = await broadcast(response.hex)
+            .catch(err => console.log(error))
+        console.log('TX RESULT', txResult)
 
-        /* Set mail body. */
-        const mailBody = `
+        /* Validate transaction. */
+        if (txResult?.result) {
+            /* Set mail body. */
+            const mailBody = `
 Payyyouts Daemon is running for [ ${payoutsDate} ]
 Run at: ${moment().format('llll')}
 
@@ -141,14 +148,15 @@ https://nexa.sh/tx/${txResult?.result}
 
 ---
 
-${txResult}
+${JSON.stringify(txResult, null, 2)}
 
 ---
-        `
+            `
 
-        /* Send mail. */
-        messageid = await sendMail(mailBody, null)
-        console.log('MESSAGE ID', messageid)
+            /* Send mail. */
+            messageid = await sendMail(mailBody, null)
+            console.log('MESSAGE ID', messageid)
+        }
 
 // TODO Update database logs
 

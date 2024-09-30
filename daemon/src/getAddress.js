@@ -26,7 +26,7 @@ export default (_scriptPubkey) => {
     address = encodeAddress(
         'nexa',
         'TEMPLATE',
-        encodeDataPush(scriptPubkey),
+        scriptPubkey,
     )
 
     /* Return address. */

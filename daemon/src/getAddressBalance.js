@@ -9,14 +9,18 @@ const headers = new Headers()
 headers.append('Content-Type', 'application/json')
 
 export default async (_address) => {
+    /* Initialize locals. */
+    let body
+    let response
+
     /* Set body. */
-    const body = JSON.stringify({
+    body = JSON.stringify({
         request: 'blockchain.address.get_balance',
         params: _address,
     })
 
     /* Request remote data. */
-    const response = await fetch(ROSTRUM_ENDPOINT, {
+    response = await fetch(ROSTRUM_ENDPOINT, {
         method,
         headers,
         body,

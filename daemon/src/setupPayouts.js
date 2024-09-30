@@ -54,7 +54,7 @@ export default async () => {
 
 /* Set today's date. */
 // FIXME: Pull the NEXT date from database.
-payoutsDate = '20240920'//moment().format('YYYYMMDD')
+payoutsDate = '20240923'//moment().format('YYYYMMDD')
 console.log(`\nToday's Date`, payoutsDate)
 
     /* Request current Payout data. */
@@ -109,7 +109,7 @@ console.log(`\nToday's Date`, payoutsDate)
 
     /* Decode response. */
     response = await response.json()
-return console.log('RESPONSE (edges):', response.data.script.edges)
+// console.log('RESPONSE (edges):', response.data.script.edges)
 
     /* Handle outputs. */
     outputs = response.data.script.edges.map(_edge => {
@@ -130,14 +130,14 @@ return console.log('RESPONSE (edges):', response.data.script.edges)
             scripts.push(output[j].scriptPubKey)
         }
     }
-return console.error('SCRIPTS', scripts, scripts.length)
+// console.error('SCRIPTS', scripts, scripts.length)
 
     qualified = scripts.filter(_script => {
         return (_script?.scriptHash?.toLowerCase() === QUALIFIED_SCRIPT_HASH) &&
             (_script?.hex.slice(-6) === QUALIFIED_LOCKTIME) &&
             (_script?.group === QUALIFIED_TOKENID)
     })
-return console.log('QUALIFIED', qualified, qualified.length)
+// console.log('QUALIFIED', qualified, qualified.length)
 
     /* Calculate total (rewards) share. */
     const totalShare = qualified.reduce(
@@ -163,7 +163,7 @@ return console.log('QUALIFIED', qualified, qualified.length)
             satoshis: satoshis.toString(),
         }
     })
-return console.log('RECEIVERS', receivers, receivers.length)
+// console.log('RECEIVERS', receivers, receivers.length)
 
     /* Initialize collation. */
     collated = {}
