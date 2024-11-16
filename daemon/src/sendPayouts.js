@@ -53,7 +53,7 @@ export default async () => {
 
 /* Set today's date. */
 // FIXME: Pull the NEXT date from database.
-payoutsDate = '20240923'//moment().format('YYYYMMDD')
+payoutsDate = '20240924'//moment().format('YYYYMMDD')
 console.log(`\n  Today's Date`, payoutsDate)
 
     /* Request current Payout data. */
@@ -131,7 +131,7 @@ console.log(`\n  Today's Date`, payoutsDate)
 
         /* Send coins. */
         response = await buildCoins(coins, receivers)
-        console.log('\nRAW TX', response.hex)
+        // console.log('\nRAW TX', response.hex)
 // return
         txResult = await broadcast(response.hex)
             .catch(err => console.log(error))

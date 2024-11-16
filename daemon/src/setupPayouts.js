@@ -54,7 +54,7 @@ export default async () => {
 
 /* Set today's date. */
 // FIXME: Pull the NEXT date from database.
-payoutsDate = '20240923'//moment().format('YYYYMMDD')
+payoutsDate = '20240924'//moment().format('YYYYMMDD')
 console.log(`\nToday's Date`, payoutsDate)
 
     /* Request current Payout data. */
