@@ -1,6 +1,6 @@
 ---
 import SectionTitle from "../ui/SectionTitle.astro"
-import ServiceCard from "../ui/ServiceCard.astro"
+import PlatformCard from "../ui/PlatformCard.astro"
 import Section from "./Section.astro"
 
 import c1 from "../../assets/pics/card-pic1.png"
@@ -13,66 +13,69 @@ import c6 from "../../assets/pics/card-pic6.png"
 const cards = [
     {
         index: 1,
-        titleTop: "Search Engine",
-        titleBottom: "Optimization",
+        titleTop: "NXY.social",
+        titleBottom: "#SocialFi",
         img: c1,
         alt: "SEO",
-        link: "https://google.com",
-    },
-    {
-        index: 2,
-        titleTop: "Pay-per-click",
-        titleBottom: "advertising",
-        img: c2,
-        alt: "SEO",
-        link: "https://google.com",
+        link: "https://nxy.social",
     },
     {
         index: 3,
-        titleTop: "Social Media",
-        titleBottom: "Marketing",
-        img: c3,
+        titleTop: "WISERSWAP.com",
+        titleBottom: "dex",
+        img: c6,
         alt: "SEO",
-        link: "https://google.com",
+        link: "https://wiserswap.com",
     },
     {
         index: 1,
-        titleTop: "Email",
-        titleBottom: "Marketing",
-        img: c4,
+        titleTop: "CAUSES.cash",
+        titleBottom: "crowdfunding",
+        img: c1,
         alt: "SEO",
-        link: "https://google.com",
+        link: "https://causes.cash",
     },
     {
         index: 2,
-        titleTop: "Content",
-        titleBottom: "Creation",
+        titleTop: "MINADO.io",
+        titleBottom: "token mining",
         img: c5,
         alt: "SEO",
-        link: "https://google.com",
+        link: "https://minado.io",
     },
     {
         index: 3,
-        titleTop: "Analytics and",
-        titleBottom: "Tracking",
-        img: c6,
+        titleTop: "AWESOMENEXA.org",
+        titleBottom: "ecosystem",
+        img: c3,
         alt: "SEO",
-        link: "https://google.com",
+        link: "https://nexa.sh",
+    },
+    {
+        index: 2,
+        titleTop: "NEXA.studio",
+        titleBottom: "#BUIDLing",
+        img: c2,
+        alt: "SEO",
+        link: "https://nexa.studio",
     },
 ]
 
 const description =
-    "At our digital marketing agency, we offer a range of platforms to help businesses grow and succeed online. These services include"
+    "Ava's DAO is proud to deliver both real-world utility and direct revenue streams for its stakers by $TOKEN monetizing our professionaly built & community-first platforms — custom tailored to satisfy all the needs of a broadly diverse and growing user-base:"
 ---
 
-<Section>
+<Section id="platforms">
     <div class="mt-[140px] mb-5">
-        <SectionTitle sectionTitle="Our Platforms" description={description} />
+        <SectionTitle
+            sectionTitle="Our Featured Platforms"
+            description={description}
+        />
 
         <div class="grid lg:grid-cols-2 lg:grid-rows-3 gap-10">
         {
             cards.map((card) => (
-                <ServiceCard
+                <PlatformCard
                     index={card.index}
                     titleTop={card.titleTop}
                     titleBottom={card.titleBottom}
