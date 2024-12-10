@@ -1,36 +1,36 @@
 ---
-import siteData from "../../data/siteData.json";
-import jsonLDGenerator from "../../utils/jsonLD";
+import siteData from '../../data/siteData.json'
+import jsonLDGenerator from '../../utils/jsonLD'
 
 type Props = {
-  // Pass title and description for internal pages
-  // If not given, this defaults to site data
-  // Url is automatic
-  // Robots are optional
-  // Frontmatter triggers a CMS post type
-  title: string;
-  description: string;
-  url: string;
-  image?: { src: string; alt: string };
-  robots?: boolean;
-  frontmatter?: any;
-};
+    // Pass title and description for internal pages
+    // If not given, this defaults to site data
+    // Url is automatic
+    // Robots are optional
+    // Frontmatter triggers a CMS post type
+    title: string
+    description: string
+    url: string
+    image?: { src: string; alt: string }
+    robots?: boolean
+    frontmatter?: any
+}
 
 const {
-  title,
-  description,
-  url = Astro.url,
-  image,
-  frontmatter,
-  robots,
-} = Astro.props;
+    title,
+    description,
+    url = Astro.url,
+    image,
+    frontmatter,
+    robots,
+} = Astro.props
 
 // Again, frontmatter triggers CMS post type
 const jsonLD = jsonLDGenerator({
-  type: frontmatter ? "post" : "website",
-  post: frontmatter,
-  url,
-});
+    type: frontmatter ? "post" : "website",
+    post: frontmatter,
+    url,
+})
 ---
 
 <!-- SEO -->

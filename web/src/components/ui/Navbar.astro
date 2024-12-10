@@ -7,8 +7,8 @@ const navLinks = [
     { name: 'Transparency', href: '/transparency' },
 ]
 
-import bars from "../../assets/bars.svg"
-import brand from "../../assets/logo.svg"
+import bars from '../../assets/bars.svg'
+import brand from '../../assets/logo.svg'
 ---
 
 <div
@@ -70,44 +70,44 @@ import brand from "../../assets/logo.svg"
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", (_) => {
-        const menuButton = document.getElementById("menuButton")
-        const navMenu = document.getElementById("navmenu")
+document.addEventListener('DOMContentLoaded', (_) => {
+    const menuButton = document.getElementById('menuButton')
+    const navMenu = document.getElementById('navmenu')
 
-        let isMenuOpen = false
+    let isMenuOpen = false
 
-        if (menuButton && navMenu) {
-            menuButton.addEventListener("click", () => {
+    if (menuButton && navMenu) {
+        menuButton.addEventListener('click', () => {
             /* Handle the height transition */
             isMenuOpen = !isMenuOpen
 
-            menuButton.setAttribute("aria-expanded", `${isMenuOpen}`)
+            menuButton.setAttribute('aria-expanded', `${isMenuOpen}`)
 
             if (isMenuOpen) {
                 navMenu.style.height = `${navMenu.scrollHeight}px`
             } else {
-                navMenu.style.height = "0px"
+                navMenu.style.height = '0px'
             }
-        });
+        })
 
-        navMenu.addEventListener("click", () => {
+        navMenu.addEventListener('click', () => {
             /* Close menu after using it */
             if (isMenuOpen) {
                 isMenuOpen = false
-                navMenu.style.height = "0px"
-                navMenu.classList.remove("h-auto")
+                navMenu.style.height = '0px'
+                navMenu.classList.remove('h-auto')
             }
-        });
+        })
 
-        window.addEventListener("resize", () => {
+        window.addEventListener('resize', () => {
             /* Resize cleanup screen state*/
             if (window.innerWidth >= 1280) {
                 /* Add height if menu was closed and then resize happened */
-                navMenu.style.height = "auto"
-                navMenu.classList.remove("h-0")
+                navMenu.style.height = 'auto'
+                navMenu.classList.remove('h-0')
             } else {
                 /* Prevent opened menu when going from bit to small */
-                navMenu.style.height = "0px"
+                navMenu.style.height = '0px'
             }
         })
     }
