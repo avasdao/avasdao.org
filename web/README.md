@@ -2,4 +2,4 @@
 
 ### https://avasdao.org
 
-_TBD_
+Ava Nakamoto showcases her life's work in a DAO that carries on where her father left off in 2010.
