@@ -1,23 +1,23 @@
 ---
-import { Image } from "astro:assets"
+import { Image } from 'astro:assets'
 
-import Facebook from "../../assets/facebook.svg"
-import Linkedin from "../../assets/linkedin.svg"
-import Logo from "../../assets/logo.svg"
-import Twitter from "../../assets/twitter.svg"
-import Section from "../sections/Section.astro"
-import ShortForm from "../ui/ShortForm.astro"
+import Facebook from '../../assets/facebook.svg'
+import Linkedin from '../../assets/linkedin.svg'
+import Logo from '../../assets/logo.svg'
+import Twitter from '../../assets/twitter.svg'
+import Section from '../sections/Section.astro'
+import ShortForm from '../ui/ShortForm.astro'
 
 const logos = [
-    { name: "X", src: Twitter, link: "https://x.com/AvasDAO" },
-    { name: "GitHub", src: Facebook, link: "https://github.com/avasdao" },
-    { name: "Linkedin", src: Linkedin, link: "https://linkedin.com" },
+    { name: 'X', src: Twitter, link: 'https://x.com/AvasDAO' },
+    { name: 'GitHub', src: Facebook, link: 'https://github.com/avasdao' },
+    { name: 'Linkedin', src: Linkedin, link: 'https://linkedin.com' },
 ]
 
 const links = [
-    { name: "Home", href: "#home" },
-    { name: "Featured Platforms", href: "#platforms" },
-    { name: "#WAGMI Grants", href: "#grants" },
+    { name: 'Roadmap', href: '/roadmap' },
+    { name: '#WAGMI Grants', href: '/grants' },
+    { name: 'Transparency', href: '/transparency' },
 ]
 ---
 
@@ -27,7 +27,7 @@ const links = [
             <div>
                 <div class="flex flex-col lg:flex-row gap-7 items-center justify-between">
                     <picture>
-                        <a href="#home">
+                        <a href="/">
                             <Image
                                 src={Logo} alt="Logo for Ava's DAO"
                                 class="w-32 h-32"

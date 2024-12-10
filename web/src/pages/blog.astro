@@ -1,19 +1,32 @@
-<body class="p-10">
+---
+import MainLayout from '../layouts/MainLayout.astro'
+import Section from '../components/sections/Section.astro'
+import '../styles/globals.css'
+---
 
-    <h1>
-        Ava's Blog
-    </h1>
+<MainLayout
+  	title="Ava's Blog — Ava's DAO"
+  	description="Ava Nakamoto showcases her life's work in a DAO that carries on where her father left off in 2010."
+>
+	<Section>
+		<div class="mt-[135px]" />
 
-    <h2>
-        Recent Posts
-    </h2>
+		<h1>
+            Ava's Blog
+        </h1>
 
-    <ol class="pl-5 list-disc">
-        <li>
-            <a href="/posts/state-of-the-dao-2024" class="text-blue-500 hover:underline">
-                State Of The DAO 2024
-            </a>
-        </li>
-    </ol>
+        <h2 class="mt-5">
+            Recent Posts
+        </h2>
 
-</body>
+        <ol class="pl-10 list-disc">
+            <li>
+                <a href="/posts/state-of-the-dao-2024" class="text-blue-500 hover:underline">
+                    State Of The DAO 2024
+                </a>
+            </li>
+        </ol>
+
+        <div class="mb-[30px]" />
+	</Section>
+</MainLayout>
