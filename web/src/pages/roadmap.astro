@@ -5,42 +5,84 @@ import MainLayout from '../layouts/MainLayout.astro'
 import Section from '../components/sections/Section.astro'
 import '../styles/globals.css'
 
-import nexa from '../assets/nexa.svg'
-import penny from '../assets/penny.png'
+// import nexa from '../assets/nexa.svg'
+// import penny from '../assets/penny.png'
 
 const milestones = []
 
 // 1H 2023
 
 milestones.push({
-    id: '30e46179-414c-4673-a2f5-860a8161c3a2',
-    title: `Launch NexaJS Library + SDK`,
+    id: '815d19db-0bd9-4813-89af-3a21f84b1f55',
+    title: `Ava’s DAO Formation`,
     status: 'complete',
-    summary: `A complete suite of modules and tools for Nexa's JavaScript builders.`,
+    summary: `
+Introducing the premier decentralized autonomous organization on Nexa’s L1 blockchain.
+Managed by the $AVAS token; which serves as a staking asset for daily, monthly and yearly rewards.
+    `,
+    period: '1H 2023',
+})
+
+milestones.push({
+    id: '30e46179-414c-4673-a2f5-860a8161c3a2',
+    title: `NEXA.js Library + SDK`,
+    status: 'complete',
+    summary: `
+NEXA.js Library + Software Development Kit (SDK) offers a Premium Builder Experience (BX) for creating decentralized applications (dApps) powered-by Nexa’s L1 (100K+ TPS) blockchain and deployed across its ever-expanding L2 (EVM) ecosystem.
+    `,
     period: '1H 2023',
 })
 
 milestones.push({
     id: '89de5b8e-f9ad-459d-8fa5-0d3b2366c842',
-    title: `Launch Causes Cash Crowdfunder`,
+    title: `Causes Cash`,
     status: 'complete',
-    summary: `Permissionless, non-custodial crowdfunding for individuals and teams to use for raising project funds.`,
+    summary: `
+A campaign management platform for individuals and teams to use for community-based campaigns.
+The platform is 100% permissionless and non-custodial. All funds are safu from any and all centralized controls.
+Featured benefits of the platform include:
+<ul class="-mt-4 pl-10 leading-5 list-disc">
+  <li>Rainmaker — airdrop campaign manager</li>
+  <li>Launchpad — crowdfunding campaign manager</li>
+</ul>`,
+    period: '1H 2023',
+})
+
+milestones.push({
+    id: 'bbbe1c06-6ebc-4f7a-beac-72ef92a02f2d',
+    title: `Nexa Studio`,
+    status: 'complete',
+    summary: `
+Offering application builders a one-stop solution for planning, developing and managing their ideas with ease.
+Managed by the $STUDIO token.
+Our enterprise-class data  services provide reliable access to ALL things Nexa.
+<ul class="-mt-4 pl-10 leading-5 list-disc">
+  <li>AI Studio</li>
+  <li>NFT Studio</li>
+</ul>`,
     period: '1H 2023',
 })
 
 milestones.push({
     id: 'e3645851-36b0-41b2-82cf-ddb3be236448',
-    title: `Launch Nexa Shell`,
+    title: `NexaShell`,
     status: 'complete',
-    summary: `An enterprise-class data provider for ALL things Nexa.`,
+    summary: `
+Offering application builders a one-stop solution for planning, developing and managing their ideas with ease.
+We offer a library of API references, guides, and tutorials to help support every and all needs.
+Our enterprise-class data  services provide reliable access to ALL things Nexa.
+    `,
     period: '1H 2023',
 })
 
 milestones.push({
     id: 'cba1438f-627c-4de0-9ea7-944f0e571dc5',
-    title: `Launch Meta (EVM) Testnet`,
+    title: `Meta (EVM) Testnet`,
     status: 'complete',
-    summary: `Avalanche Subnet running an EVM-compatible sidechain with NEXA as its native currency.`,
+    summary: `
+MetaNet is an 100% EVM-compatible layer 2 (L2) network, which uses a 1-to-1 peg of NEXA as its native currency.
+This bespoke Avalanche-powered subnet is written entirely in Rust, and currently offers a scaling limit of over 20,000+ TPS.
+    `,
     period: '1H 2023',
 })
 
@@ -48,133 +90,219 @@ milestones.push({
 
 milestones.push({
     id: '0ece6cc9-5a3a-4058-83bc-0be2bd778b3d',
-    title: `Launch Awesome Nexa List + Web Portal`,
+    title: `Awesome Nexa Directory + Web Portal`,
     status: 'pending',
-    summary: `A curated catalog of the BEST of Nexa's extensive resources.`,
+    summary: `
+A curated catalog of the BEST of Nexa’s vast & diverse community resources.
+    `,
     period: '2H 2023',
 })
 
 milestones.push({
     id: 'e52d04dc-34ab-4e17-aae4-65f772a5ed4d',
-    title: `Re-launch Nexa (Instant) Swap`,
+    title: `Nexa (Instant) Swap`,
     status: 'pending',
-    summary: `A non-custodial asset swapping service to quickly exchange Nexa to other cryptos.`,
+    summary: `
+A non-custodial asset swapping service to quickly exchange Nexa to other cryptos.
+    `,
     period: '2H 2023',
 })
 
 milestones.push({
     id: 'e52d04dc-34ab-4e17-aae4-65f772a5ed4d',
-    title: `Nexa Token Exchange`,
+    title: `Nexa Exchange`,
     status: 'pending',
-    summary: `A dedicated Nexa exchange supporting 3rd-party platforms (using API keys), including: CoinEx, MEXC and Txbit.`,
+    summary: `
+A free (as in beer) & trustless platform, dedicated to providing a premium user experience for managing the overall security of your Nexa assets.
+Managed by the $NXL token; also serving as a (potential) stablecoin model.
+Featured benefits include direct integration with the most popular 3rd-party platforms (securely, using API keys), including:
+<ul class="-mt-4 pl-10 leading-5 list-disc">
+  <li>BingX</li>
+  <li>BitMart</li>
+  <li>CoinEx</li>
+  <li>MEXC</li>
+  <li>and many more…</li>
+</ul>`,
     period: '2H 2023',
+})
+
+milestones.push({
+    id: 'bc8bc6c0-4aae-42eb-800c-7c4c515318cb',
+    title: `WiserSwap`,
+    status: 'complete',
+    summary: `
+Nexa’s premier decentralized exchange (DEX) offering trustless access to Nexa’s hottest assets.
+    `,
+    period: '1H 2024',
+})
+
+milestones.push({
+    id: '904bf7de-8fe9-438e-9157-a262c9abb9de',
+    title: `CashFusion (Privacy)`,
+    status: 'complete',
+    summary: `
+Using the CoinJoin protocol to offer a novel privacy solution for the Bitcoin, Bitcoin Cash and Nexa communities.
+    `,
+    period: '1H 2024',
+})
+
+milestones.push({
+    id: '9602cfa1-570d-46e9-aaad-96feffcfd55e',
+    title: `Nxy Social`,
+    status: 'complete',
+    summary: `
+Introducing Web4: Unstoppable Apps and Nexa’s premier social network.
+Our team is preparing several open source clients to offer a premium user experience to the digital world that exists beyond the Internet we know today…
+The network is managed by the $NXY token; which also serves as a model for the first mineable token on Nexa’s blockchain.
+Supported platforms will include all of the following:
+<ul class="-mt-4 pl-10 leading-5 list-disc">
+  <li>Android</li>
+  <li>iOS</li>
+  <li>Windows</li>
+  <li>macOS</li>
+  <li>Linux</li>
+</ul>`,
+    period: '1H 2024',
 })
 
 milestones.push({
     id: '267bccbf-61bf-4bd5-a8a1-9545ff4ee092',
-    title: `Launch Meta (EVM) Mainnet`,
+    title: `Meta (EVM) Mainnet`,
     status: 'planning',
-    summary: `Avalanche Subnet running an EVM-compatible sidechain with NEXA as its native currency.`,
-    period: '1H 2023',
+    summary: `
+Our goal is to deploy and maintain an enterprise-ready infrastructure for the NEW MetaNet sidechain.
+Critical activities leading up to the Mainnet launch include:
+<ul class="-mt-4 pl-10 leading-5 list-disc">
+  <li>code (security) audits</li>
+  <li>stress testing</li>
+  <li>penetration testing</li>
+</ul>NOTE: Mainnet launch is pending the successful crowdfunding for 1yr of staking the 1st network validator.
+    `,
+    period: '1H 2025',
+})
+
+milestones.push({
+    id: 'bc8bc6c0-4aae-42eb-800c-7c4c515318cb',
+    title: `WiserSwap Bridge`,
+    status: 'planning',
+    summary: `
+A 100% FREE & decentralized asset bridge between the Nexa MetaNet and the MOST popular EVM-compatible networks, including:
+<ul class="-mt-4 pl-10 leading-5 list-disc">
+  <li>Avalanche (AVAX)</li>
+  <li>Base (BASE)</li>
+  <li>BNB Smart Chain (BSC)</li>
+  <li>Ethereum (ETH)</li>
+  <li>Polygon (POL)</li>
+  <li>Solana (SOL)</li>
+  <li>and more…</li>
+</ul>`,
+    period: '1H 2025',
+})
+
+milestones.push({
+    id: '7b46b0c3-ed80-4bb6-b3c3-ab951321275f',
+    title: `Nxy Mobile App`,
+    status: 'pending',
+    summary: `
+A native mobile app for Android and iOS that introduces the world to Web4: Unstoppable Apps.
+    `,
+    period: '1H 2025',
 })
 
 milestones.push({
     id: '41115cd4-8f2d-4721-bb20-c76e3f8574fd',
-    title: `Re-launch Nexa Rocks!`,
+    title: `Minado (formerly Nexa Rocks!)`,
     status: 'pending',
-    summary: `Nexa mining pool, supporting "token mining" and featuring the Infinity Pool.`,
-    period: '2H 2023',
-})
-
-milestones.push({
-    id: '0c869a8c-136f-441e-aba5-021d4cb879d0',
-    title: `Launch PyNexa Library`,
-    status: 'pending',
-    summary: `A complete suite of modules and tools for Nexa's Python builders.`,
-    period: '1H 2023',
-})
-
-milestones.push({
-    id: '2a163a9d-6f67-4785-8bed-03b4407b0788',
-    title: `Launch NexaRs Library`,
-    status: 'pending',
-    summary: `A complete suite of modules and tools for Nexa's Rust builders.`,
-    period: '1H 2023',
+    summary: `
+Nexa mining pool, supporting "token mining" and featuring the Infinity Pool.
+    `,
+    period: '2H 2025',
 })
 
 // 1H 2024
 
 milestones.push({
-    id: 'aa508588-67b4-4117-8409-398e97207435',
-    title: `Launch Nexa (Cross-chain) Bridge`,
+    id: '7b46b0c3-ed80-4bb6-b3c3-ab951321275f',
+    title: `Nxy Social Phase II`,
     status: 'planning',
-    summary: `A FREE and 100% decentralized, asset bridge to the leading EVM networks, including: Ethereum (ETH), BNB Smart Chain (BSC), Avalanche (AVAX), Polygon (MATIC) and more...`,
-    period: '2H 2023',
-})
-
-milestones.push({
-    id: '5b2359f0-5321-445d-8b5a-96cf8d6afdb6',
-    title: `Launch Nexa Domains`,
-    status: 'planning',
-    summary: `An ENS-style registrar for the Nexa community supporting ".nexa" domains.`,
-    period: '1H 2024',
+    summary: `
+Grow usage and utility of the NEW Nxy community.
+Community engagement will be encouraged through:
+<ul class="-mt-4 pl-10 leading-5 list-disc">
+  <li>contest rewards</li>
+  <li>bounty rewards</li>
+</ul>`,
+    period: '2H 2025',
 })
 
 milestones.push({
     id: '7b46b0c3-ed80-4bb6-b3c3-ab951321275f',
-    title: `Launch Nexaverse Mobile App`,
+    title: `Hardware Wallet`,
     status: 'pending',
-    summary: `A native mobile app for Android and iOS that introduces the world to Web4: Unstoppable Apps.`,
-    period: '1H 2024',
+    summary: `
+Support for the most popular hardware wallets, including:
+<ul class="-mt-4 pl-10 leading-5 list-disc">
+  <li>Ledger</li>
+  <li>OneKey</li>
+  <li>Trezor</li>
+</ul>`,
+    period: '2H 2025',
 })
 
 // 2H 2024
 
 milestones.push({
     id: '671e794a-46d3-4fea-9d76-61747d3433e3',
-    title: `Begin Ava's DAO Governance`,
+    title: `Ava's DAO Governance`,
     status: 'planning',
-    summary: `A Decentralized Autonomous Organization (DAO) to oversee the management of the suite of tools and service being build and deployed for the Nexa blockchain. We will introduce the Crypto world to the first cross-chain Decentralized Autonomous Organization (DAO), spanning: Nexa, Bitcoin, Bitcoin Cash, Avalanche, Binance and more...`,
-    period: '2H 2024',
+    summary: `
+A libertarian-inspired Decentralized Autonomous Organization (DAO) to oversee the management of the suite of tools and service being build and deployed for the Nexa blockchain.
+We’re introducing the Crypto world to the first cross-chain DAO, spanning:
+<ul class="-mt-4 pl-10 leading-5 list-disc">
+  <li>Avalanche (AVAX)</li>
+  <li>Base (BASE)</li>
+  <li>Binance (BNB)</li>
+  <li>Bitcoin (BTC)</li>
+  <li>Bitcoin Cash (BCH)</li>
+  <li>Nexa (NEXA)</li>
+  <li>Solana (SOL)</li>
+  <li>and more…</li>
+</ul>`,
+    period: '1H 2026',
 })
 
 milestones.push({
     id: 'a6124c53-e49b-436d-8e71-4341a62660a9',
-    title: `Launch Ava's #BUIDL (Accelerator)`,
+    title: `Ava's #BUIDL (Accelerator)`,
     status: 'planning',
-    summary: `Support startups building on Nexa.`,
-    period: '2H 2024',
-})
-
-// 1H 2025
-
-milestones.push({
-    id: '64208ca0-e3f5-4c16-b640-d8205d16bc1d',
-    title: `Nexaverse Scaling`,
-    status: 'planning',
-    summary: `Grow usage and utility of the NEW Nexaverse.`,
-    period: '1H 2025',
-})
-
-// 2H 2025
-
-milestones.push({
-    id: '64208ca0-e3f5-4c16-b640-d8205d16bc1d',
-    title: `#BUIDL Scaling`,
-    status: 'planning',
-    summary: `Grow usage and support for startups building on Nexa.`,
-    period: '2H 2025',
-})
-
-// 1H 2026
-
-milestones.push({
-    id: '',
-    title: `Prepare for 1st Halvening Event`,
-    status: 'planning',
-    summary: `Good stuff!`,
+    summary: `
+Ava’s DAO aims to become among the leaders of accelerators and incubators out there that are designed to build and grow successful crypto startups. 🚀
+We aim to curate a world-class team, offering everything from:
+<ul class="-mt-4 pl-10 leading-5 list-disc">
+  <li>seed funding</li>
+  <li>mentorship</li>
+  <li>networking</li>
+  <li>co-working spaces</li>
+  <li>educational resources</li>
+  <li>and much more…</li>
+</ul>`,
     period: '1H 2026',
 })
+
+milestones.push({
+    id: 'a6124c53-e49b-436d-8e71-4341a62660a9',
+    title: `Ava's #BUIDL Phase II`,
+    status: 'planning',
+    summary: `
+An organized and collective effort to GROW the usage and support for individuals and teams building on Nexa, using:
+<ul class="-mt-4 pl-10 leading-5 list-disc">
+  <li>direct financial assistance</li>
+  <li>mentorship programs</li>
+  <li>and much more…</li>
+</ul>`,
+    period: '2H 2026',
+})
+
 ---
 
 <MainLayout
@@ -233,7 +361,7 @@ milestones.push({
 
 									<div class="-mt-3 mb-5 pl-2 flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
 										<div class="flex flex-col gap-1">
-											<h2 class="text-xl font-medium text-rose-600">
+											<h2 class="text-2xl font-medium text-rose-600 tracking-widest">
 												{milestone.title}
 											</h2>
 
@@ -249,9 +377,10 @@ milestones.push({
 												{milestone.status}
 											</span>}
 
-											<p class="text-sm text-gray-600">
-												{milestone.summary}
-											</p>
+											<p
+                                                class="-mt-4 text-lg text-gray-600 leading-8 tracking-wider"
+                                                set:html={milestone.summary.replaceAll('\n', '<br />')}
+                                            />
 										</div>
 
 										<div class="whitespace-nowrap text-right text-sm text-gray-500">
@@ -266,26 +395,6 @@ milestones.push({
 					)}
 
 				</ul>
-            </div>
-        </section>
-
-        <section class="mt-10 px-3 sm:px-10 pb-20 flex flex-col items-center gap-6">
-            <h2 class="text-5xl font-extrabold text-rose-600 opacity-50">
-                Penny-a-Nexa
-            </h2>
-
-            <p class="text-gray-700 text-lg">
-                Our team is working tirelessly to support a community effort to <em>eventually</em> raise the value of <span class="font-extrabold">ONE $NEXA (1.00)</span> equal to the value of <span class="font-extrabold">ONE U.S. PENNY ($0.01)</span>.
-            </p>
-
-            <p class="text-gray-700 text-lg">
-                We're targeting some time after the 1st halvening event in the <span class="font-extrabold">Summer/Fall of 2026</span> to reach this very ambitious goal.
-            </p>
-
-            <div class="grid grid-cols-2 gap-4 items-center">
-				<Image src={penny} alt="penny" class="w-3/4 mx-auto" />
-
-				<Image src={nexa} alt="Nexa logo" class="" />
             </div>
         </section>
 
