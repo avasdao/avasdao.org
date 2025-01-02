@@ -21,31 +21,83 @@ tags: ["dao", "news", "official"]
 
 _Last Updated: 2024-12-31_
 
+<p class="py-10 w-2/3 text-xl leading-9">
 Welcome to our 2nd State of the DAO annual report.
+</p>
 
-
-<h1 class="mt-5 text-3xl font-light text-rose-500">
+![What we've accomplished](/img/banners/accomplished-24.jpg)
+<h1 class="mt-10 text-5xl font-light text-rose-500">
     What We've Accomplished
 </h1>
 
-1. __Introducton of WiserSwap__ — First, I created a new Astro project and set up my online accounts.
+<ol class="mt-3 pl-10 list-decimal">
+<li>
+    <strong>WiserSwap —</strong>
+    In early January, we released Nexa's 1st decentralized exchange (DEX) and introduced Nexa Exchange Loyalty ($NXL) tokens.
+</li>
+<li>
+    <strong>CashFusion (Privacy) —</strong>
+    TBD
+</li>
+<li>
+    <strong>Nxy Social + Token Mining —</strong>
+    TBD
+</li>
+</ol>
 
-2. __Launch of Nxy Social__ — I then learned how to make pages by creating new `.astro` files and placing them in the `src/pages/` folder.
+<h2 class="mt-5 text-2xl font-medium text-rose-700 uppercase">
+    WiserSwap
+</h2>
 
-3. __Introduction of Token Mining__ — This is my first blog post! I now have Astro pages and Markdown posts!
+<p class="px-5">
+    In early January, we released Nexa's 1st decentralized exchange (DEX) and introduced Nexa Exchange Loyalty ($NXL) tokens.
+</p>
+
+<h2 class="mt-5 text-2xl font-medium text-rose-700 uppercase">
+    CashFusion (Privacy)
+</h2>
+
+<p class="px-5">
+    TBD
+</p>
+
+<h2 class="mt-5 text-2xl font-medium text-rose-700 uppercase">
+    Nxy Social + Token Mining
+</h2>
+
+<p class="px-5">
+    TBD
+</p>
 
 
-<h1 class="mt-5 text-3xl font-light text-rose-500">
-    What's Next?
+<h1 class="mt-10 text-5xl font-light text-rose-500">
+    Our Vision
 </h1>
 
-We are currently preparing for Nexa's 1st protocol upgrade, which will introduce:
+We currently sit as the leading project creator within the Nexa ecosystem.
+
+Our community projects have been wildly successful.
+Currently 4 out of the TOP5 Nexa tokens are Ava's DAO community tokens.
+
+![Ava's Assets Leaderboard](/img/banners/avas-assets-leaderboard.png)
+_source: https://explorer.nexa.org/tokens (as of 2025-01-01)_
+
+<h1 class="mt-10 text-5xl font-light text-rose-500">
+    How We See The Future...
+</h1>
+
+Our team is currently preparing for Nexa's 1st protocol upgrade, set for activation on March 15th, 2025 -- which will introduce:
 
 <ol class="pl-10 list-decimal">
     <li>Increased VM script limits</li>
     <li>Read-only UTXOs</li>
+    <li>Script machine registers</li>
 </ol>
 
 With the introduction of these key technologies, our team will immediately begin Version 2 deployments from our suite of NexScript contracts.
+
+![Visual Framework](/img/banners/visual-framework.png)
+
+lorem...
 
 </main>
