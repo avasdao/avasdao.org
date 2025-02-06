@@ -98,6 +98,6 @@ With the introduction of these key technologies, our team will immediately begin
 
 ![Visual Framework](/img/banners/visual-framework.png)
 
-lorem...
+In 2025, our focus will be on de-monetizing our "Nexa" branded platforms and focusing on our "independent" brands, like WiserSwap and Minado.
 
 </main>
