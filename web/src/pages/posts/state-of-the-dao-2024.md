@@ -82,6 +82,7 @@ Currently 4 out of the TOP5 Nexa tokens are Ava's DAO community tokens.
 ![Ava's Assets Leaderboard](/img/banners/avas-assets-leaderboard.png)
 _source: https://explorer.nexa.org/tokens (as of 2025-01-01)_
 
+
 <h1 class="mt-10 text-5xl font-light text-rose-500">
     How We See The Future...
 </h1>
@@ -98,6 +99,23 @@ With the introduction of these key technologies, our team will immediately begin
 
 ![Visual Framework](/img/banners/visual-framework.png)
 
-In 2025, our focus will be on de-monetizing our "Nexa" branded platforms and focusing on our "independent" brands, like WiserSwap and Minado.
+
+<h1 class="mt-10 text-5xl font-light text-rose-500">
+    Platform Deprecations
+</h1>
+
+In line with our recent pivot _(at the end of 2024)_ towards focusing on development of our OWN brand and identity; we will continue deprecating most _(but NOT all)_ of our NEXA-branded services in 2025:
+
+<ol class="pl-10 list-decimal">
+    <li>NEXA.exchange</li>
+    <li>NEXA.garden</li>
+    <li>NEXA.sh</li>
+    <li>NEXA.studio</li>
+    <li>NexaSwap.com</li>
+</ol>
+
+In 2025, our focus will be on expanding monetizing opportunities with our "independent" brands — namely our decentralized exchange [__WiserSwap__](https://wiserswap.com) and our token mining platform [__Minado__](https://minado.io).
+Asset migration plans are currently being prepared for both [__$NXL__](https://explorer.nexa.org/token/nexa:tzs4e8n7dqtsyk0axx7zvcgt2snzt3t7z07ued0nu89hlvp6ggqqqdrypc4ea) and [__$STUDIO__](https://explorer.nexa.org/token/nexa:tztnyazksgqpkphrx2m2fgxapllufqmuwp6k07xtlc8k4xcjpqqqq99lxywr8).
+Announcements will be made in the upcoming months.
 
 </main>
