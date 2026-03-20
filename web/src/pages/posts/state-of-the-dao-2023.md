@@ -1,4 +1,6 @@
 ---
+# src/pages/posts/state-of-the-dao-2023.md
+
 title: "Ava's State Of The DAO 2023"
 pubDate: 2023-12-31
 description: "A recap of all Ava's activities over the course of 2023."

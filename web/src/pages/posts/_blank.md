@@ -1,4 +1,6 @@
 ---
+# src/pages/posts/_blank.md
+
 title: "Blank"
 pubDate: YYYY-MM-DD
 description: "TBD"
